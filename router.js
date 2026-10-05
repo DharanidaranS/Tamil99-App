@@ -2,70 +2,69 @@
     console.log("Unified Routing Engine Loaded");
 
     function initRouting() {
-        const sidebarLinks = document.querySelectorAll('a[data-path], button[data-path], [data-path]');
-        sidebarLinks.forEach(link => {
-            const newLink = link.cloneNode(true);
-            link.parentNode.replaceChild(newLink, link);
-
-            newLink.addEventListener('click', (e) => {
-                const path = newLink.getAttribute('data-path');
-                if (!path) return;
-
-                e.preventDefault();
-                newLink.style.transform = 'scale(0.95)';
-                setTimeout(() => newLink.style.transform = 'none', 100);
-
-                setTimeout(() => {
-                    // Detect current page
-                    const isDashboard = !!document.querySelector('meta[content="web_dashboard"]') || window.location.pathname.includes('dashboard');
-
-                    // If navigating to main apps
-                    if (path === 'tamil99-typing') {
-                        if (!window.location.pathname.includes('typing_studio')) {
-                            window.location.href = '../tamil99_suite_typing_studio_ultra_premium/index.html';
-                        }
-                        return;
-                    }
-                    if (path === 'english-to-tamil') {
-                        if (!window.location.pathname.includes('fluent_tamil')) {
-                            window.location.href = '../fluent_tamil_precision/index.html';
-                        }
-                        return;
-                    }
-                    if (path === 'dashboard') {
-                        if (!isDashboard) {
-                            window.location.href = '../tamil99_suite_dashboard_ultra_premium/index.html';
-                        } else {
-                            showDashboardSection('dashboard');
-                        }
-                        return;
-                    }
-
-                    // Dashboard internal sections
-                    let targetSectionId = path;
-                    if (path.includes('learn-tamil')) targetSectionId = 'learn-tamil';
-                    if (path.includes('typing-practice')) targetSectionId = 'typing-practice';
-                    if (path.includes('government-forms') || path.includes('government')) targetSectionId = 'gov-forms';
-                    if (path.includes('documents') || path.includes('pdf')) targetSectionId = 'docs-pdf';
-                    if (path.includes('text-editor')) targetSectionId = 'text-editor';
-                    if (path.includes('voice-to-text')) targetSectionId = 'voice-to-text';
-
-                    if (!isDashboard) {
-                        // Redirect to dashboard with a hash to open that section (optional, or just to dashboard)
-                        window.location.href = '../tamil99_suite_dashboard_ultra_premium/index.html#' + targetSectionId;
-                        return;
-                    }
-
-                    showDashboardSection(targetSectionId, newLink);
-                }, 150);
-            });
-        });
-
+        document.body.addEventListener('click', handleNavigation);
+        
         // Handle hash navigation if arriving on dashboard
         if (window.location.hash) {
             const hashId = window.location.hash.substring(1);
             showDashboardSection(hashId);
         }
+    }
+
+    function handleNavigation(e) {
+        const link = e.target.closest('[data-path]');
+        if (!link) return;
+
+        const path = link.getAttribute('data-path');
+        if (!path) return;
+
+        e.preventDefault();
+        link.style.transform = 'scale(0.95)';
+        setTimeout(() => link.style.transform = 'none', 100);
+
+        setTimeout(() => {
+            // Detect current page
+            const isDashboard = !!document.querySelector('meta[content="web_dashboard"]') || window.location.pathname.includes('dashboard');
+
+            // If navigating to main apps
+            if (path === 'tamil99-typing') {
+                if (!window.location.pathname.includes('typing_studio')) {
+                    window.location.href = '../tamil99_suite_typing_studio_ultra_premium/index.html';
+                }
+                return;
+            }
+            if (path === 'english-to-tamil') {
+                if (!window.location.pathname.includes('fluent_tamil')) {
+                    window.location.href = '../fluent_tamil_precision/index.html';
+                }
+                return;
+            }
+            if (path === 'dashboard') {
+                if (!isDashboard) {
+                    window.location.href = '../tamil99_suite_dashboard_ultra_premium/index.html';
+                } else {
+                    showDashboardSection('dashboard');
+                }
+                return;
+            }
+
+            // Dashboard internal sections
+            let targetSectionId = path;
+            if (path.includes('learn-tamil')) targetSectionId = 'learn-tamil';
+            if (path.includes('typing-practice')) targetSectionId = 'typing-practice';
+            if (path.includes('government-forms') || path.includes('government')) targetSectionId = 'gov-forms';
+            if (path.includes('documents') || path.includes('pdf')) targetSectionId = 'docs-pdf';
+            if (path.includes('text-editor')) targetSectionId = 'text-editor';
+            if (path.includes('voice-to-text')) targetSectionId = 'voice-to-text';
+
+            if (!isDashboard) {
+                // Redirect to dashboard with a hash to open that section
+                window.location.href = '../tamil99_suite_dashboard_ultra_premium/index.html#' + targetSectionId;
+                return;
+            }
+
+            showDashboardSection(targetSectionId, link);
+        }, 150);
     }
 
     function showDashboardSection(targetSectionId, activeLinkElement = null) {
