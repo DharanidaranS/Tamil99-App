@@ -1,0 +1,240 @@
+/* Shared, quiet visual system for the dashboard and typing workspace. */
+:root {
+  color-scheme: light;
+  --app-canvas: #f5f7fa;
+  --app-surface: #ffffff;
+  --app-ink: #17212f;
+  --app-muted: #667386;
+  --app-border: #e3e8ef;
+  --app-accent: #8b1e2b;
+}
+
+html, body { background: var(--app-canvas) !important; color: var(--app-ink); }
+body { font-family: "Catamaran", "Nirmala UI", "Segoe UI", sans-serif !important; }
+/* Tailwind assigns font families directly to many child elements, so set the
+   app stack on text controls and content too. Keep the symbol font intact. */
+body :not(.material-symbols-outlined) {
+  font-family: "Catamaran", "Nirmala UI", "Segoe UI", sans-serif !important;
+}
+body > .fixed.pointer-events-none,
+body > .fixed.rounded-full { display: none !important; }
+
+/* A restrained desktop title bar and neutral navigation rail. */
+body > div.fixed.top-0.left-0.right-0.h-8 {
+  background: #fff !important;
+  color: var(--app-ink) !important;
+  border-color: var(--app-border) !important;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 4%);
+}
+body > div.fixed.top-0.left-0.right-0.h-8 span { color: var(--app-muted) !important; }
+body > aside.dark-acrylic-sidebar {
+  background: #fff !important;
+  color: var(--app-ink) !important;
+  border-color: var(--app-border) !important;
+  box-shadow: 1px 0 3px rgb(16 24 40 / 3%) !important;
+  backdrop-filter: none !important;
+}
+aside.dark-acrylic-sidebar > div:first-child { background: #fff !important; border-color: var(--app-border) !important; }
+aside.dark-acrylic-sidebar > div:first-child span { color: var(--app-ink) !important; }
+aside.dark-acrylic-sidebar > div:first-child span[class*="rounded-full"] { color: var(--app-accent) !important; background: #f8ecee !important; }
+aside.dark-acrylic-sidebar nav a {
+  color: #4e5b6c !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transition: background .15s ease, color .15s ease;
+}
+aside.dark-acrylic-sidebar nav a:hover { background: #f5f6f8 !important; color: var(--app-ink) !important; }
+aside.dark-acrylic-sidebar nav a[aria-current="page"] {
+  background: #f8ecee !important;
+  color: var(--app-accent) !important;
+  border-color: #f0d9dd !important;
+}
+aside.dark-acrylic-sidebar nav a span { color: inherit !important; }
+aside.dark-acrylic-sidebar nav a span.absolute { display: none !important; }
+aside.dark-acrylic-sidebar p { color: #8b95a3 !important; }
+aside.dark-acrylic-sidebar > div:last-child { background: #fff !important; border-color: var(--app-border) !important; }
+aside.dark-acrylic-sidebar > div:last-child span { color: var(--app-muted) !important; }
+
+/* Content surfaces: clear borders, softer shadows, and fewer effects. */
+.acrylic-glass, .studio-mica {
+  background: var(--app-surface) !important;
+  border: 1px solid var(--app-border) !important;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 4%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.card-specular::before { display: none !important; }
+#dashboard-metrics { display: none !important; }
+#dashboard-intro { padding: 1.5rem !important; }
+#dashboard-intro > .relative.z-10 > div:last-child { display: none !important; }
+#dashboard-intro [aria-hidden="true"] { display: none !important; }
+#dashboard-intro .relative.z-10 { justify-content: flex-start !important; }
+#dashboard-intro h1 { font-size: 1.75rem !important; line-height: 1.25 !important; }
+#dashboard-intro p { color: var(--app-muted) !important; }
+#dashboard-intro .relative.z-10 > div:first-child > div:first-child > span:not(.gold-badge) { display: none !important; }
+#section-dashboard kbd { display: none !important; }
+body[data-page="typing-studio"] { overflow-y: auto !important; }
+body[data-page="typing-studio"] main { padding: 1rem 1.5rem !important; }
+body[data-page="typing-studio"] main > div > div:first-child:has(.kolam-pattern),
+body[data-page="typing-studio"] main > div > div.h-6 { display: none !important; }
+#studio-modebar {
+  background: #fff !important;
+  border: 1px solid var(--app-border) !important;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 4%) !important;
+  margin-bottom: .75rem !important;
+}
+#studio-engine-status, #studio-quick-switches { display: none !important; }
+#studio-modebar button {
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--app-muted) !important;
+  min-height: 2.35rem;
+}
+#studio-mode-options { background: #f5f7fa !important; border: 1px solid var(--app-border) !important; box-shadow: none !important; }
+#studio-mode-options button[aria-pressed="true"] { background: #f8ecee !important; color: var(--app-accent) !important; border-color: #f0d9dd !important; font-weight: 700 !important; }
+#studio-mode-options button:hover { background: #fff !important; color: var(--app-ink) !important; }
+#studio-workspace { display: block !important; margin-bottom: 1rem !important; }
+#studio-workspace > div:first-child { display: flex !important; width: 100% !important; }
+#studio-workspace > div:last-child { display: none !important; }
+#studio-toolbar {
+  background: #fff !important;
+  border: 1px solid var(--app-border) !important;
+  border-radius: 12px 12px 0 0 !important;
+  box-shadow: none !important;
+  padding: .65rem .85rem !important;
+}
+#studio-font-control, #studio-formatting-controls, .studio-nonfunctional-action,
+#studio-toolbar [title="Export as Word / OpenDocument"] { display: none !important; }
+#studio-toolbar #size-dec, #studio-toolbar #size-inc,
+#studio-toolbar #btn-copy, #studio-toolbar #btn-clear {
+  border-radius: 8px !important;
+  background: #fff !important;
+  color: var(--app-ink) !important;
+  border: 1px solid var(--app-border) !important;
+  box-shadow: none !important;
+}
+#studio-workspace > div:first-child > div:nth-child(2) {
+  background: #fff !important;
+  border-color: var(--app-border) !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 4%) !important;
+  min-height: 58vh !important;
+  justify-content: flex-start !important;
+  padding: 1.25rem 1.5rem !important;
+}
+#studio-watermark, #studio-ruler { display: none !important; }
+#studio-stats {
+  display: flex !important;
+  background: #f7f8fa !important;
+  border: 1px solid var(--app-border) !important;
+  box-shadow: none !important;
+  margin-top: 1rem !important;
+  padding: .65rem .85rem !important;
+}
+#studio-workspace > div:first-child > div:nth-child(2).canvas-manuscript-lines { background-image: none !important; }
+#tamil-editor {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 52vh !important;
+  flex: 1 1 auto !important;
+  font-size: 1.2rem !important;
+  line-height: 1.9 !important;
+  letter-spacing: 0 !important;
+  background: #fff !important;
+  outline: none !important;
+}
+#studio-keyboard-panel {
+  background: #fff !important;
+  border: 1px solid var(--app-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 4%) !important;
+  margin-bottom: 1.5rem;
+}
+#studio-keyboard-panel > div:nth-child(2) {
+  background: #f5f7fa !important;
+  border-color: var(--app-border) !important;
+}
+main { color: var(--app-ink); background-color: var(--app-canvas) !important; }
+.section-content, .page-section { background-color: var(--app-canvas) !important; }
+.section-content > .relative.overflow-hidden {
+  background: #fff !important;
+  border: 1px solid var(--app-border) !important;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 4%) !important;
+}
+.section-content > .relative.overflow-hidden .relative.p-6,
+.section-content > .relative.overflow-hidden .relative.p-6 * { color: var(--app-ink) !important; text-shadow: none !important; }
+.section-content > .relative.overflow-hidden .relative.p-6 > div:last-child { background: #f7f8fa !important; border-color: var(--app-border) !important; }
+.section-content > .relative.overflow-hidden .relative.p-6 > div:last-child button:first-child { background: #f8ecee !important; color: var(--app-accent) !important; box-shadow: none !important; }
+.section-content > .relative.overflow-hidden .relative.p-6 > div:last-child button:last-child { background: #fff !important; color: var(--app-muted) !important; }
+main .kolam-pattern { background-image: none !important; }
+main > div > div:first-child:has(.kolam-pattern) {
+  background: #fff !important;
+  color: var(--app-ink) !important;
+  border: 1px solid var(--app-border) !important;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 4%) !important;
+}
+main > div > div:first-child:has(.kolam-pattern) .relative.z-10,
+main > div > div:first-child:has(.kolam-pattern) .relative.z-10 * {
+  color: var(--app-ink) !important;
+  text-shadow: none !important;
+}
+main > div > div:first-child:has(.kolam-pattern) .relative.z-10 > div:last-child {
+  background: #f7f8fa !important;
+  border-color: var(--app-border) !important;
+  box-shadow: none !important;
+}
+main > div > div:first-child:has(.kolam-pattern) .relative.z-10 > div:last-child > div {
+  background: #fff !important;
+  border-color: var(--app-border) !important;
+}
+main > div > div:first-child:has(.kolam-pattern) .gold-badge {
+  background: #f8ecee !important;
+  color: var(--app-accent) !important;
+  border-color: #f0d9dd !important;
+  box-shadow: none !important;
+}
+main .keycap-pbt, main .keycap-mod { box-shadow: 0 1px 2px rgb(16 24 40 / 8%) !important; }
+button, a { outline-color: var(--app-accent); }
+:focus-visible { outline: 2px solid #b34a58; outline-offset: 2px; }
+
+@media (max-width: 800px) {
+  body > aside.dark-acrylic-sidebar { width: 4.25rem !important; }
+  body > aside.dark-acrylic-sidebar > div:first-child { justify-content: center; padding-inline: .5rem !important; }
+  body > aside.dark-acrylic-sidebar > div:first-child > div.absolute,
+  body > aside.dark-acrylic-sidebar > div:first-child > div.flex-col,
+  body > aside.dark-acrylic-sidebar nav a span:not(.material-symbols-outlined),
+  body > aside.dark-acrylic-sidebar p,
+  body > aside.dark-acrylic-sidebar > div:last-child { display: none !important; }
+  body > aside.dark-acrylic-sidebar nav a { justify-content: center; padding: .65rem !important; }
+  body > aside.dark-acrylic-sidebar nav a .material-symbols-outlined { margin: 0 !important; }
+  body > div.pl-64 { margin-left: 4.25rem !important; padding-left: 0 !important; }
+  body > div.pl-64 > header { left: 4.25rem !important; padding-inline: .75rem !important; }
+  body > div.pl-64 main { padding-inline: .75rem !important; }
+  #studio-modebar { align-items: stretch !important; }
+  #studio-mode-options { width: 100%; display: flex !important; }
+  #studio-mode-options button { flex: 1 1 0; justify-content: center; padding-inline: .5rem !important; font-size: .8rem !important; }
+  #studio-keyboard-panel > div:first-child { align-items: flex-start !important; }
+  #studio-keyboard-panel > div:first-child > div:last-child { width: 100%; flex-wrap: wrap; }
+}
+
+@media (max-width: 560px) {
+  body[data-page="typing-studio"] main { padding: .75rem !important; }
+  #studio-modebar { padding: .5rem !important; }
+  #studio-mode-options button { min-width: 0; line-height: 1.25; }
+  #studio-workspace > div:first-child > div:nth-child(2) { padding: 1rem !important; min-height: auto !important; }
+  #tamil-editor { min-height: 42vh !important; font-size: 1.05rem !important; }
+  #studio-stats { gap: .5rem; font-size: .75rem !important; }
+  #studio-stats > div { gap: .5rem !important; }
+  #studio-keyboard-panel { padding: .65rem !important; }
+  #studio-keyboard-panel > div:first-child { gap: .5rem !important; }
+  #studio-keyboard-panel > div:first-child > div:first-child { flex-wrap: wrap; }
+}
+
+@media (max-height: 680px) and (min-width: 561px) {
+  #studio-workspace > div:first-child > div:nth-child(2) { min-height: 420px !important; }
+  #tamil-editor { min-height: 340px !important; }
+}

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluent Tamil Precision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../app-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B1E2B',
+                        'primary-hover': '#A62436',
+                        'primary-active': '#64121C',
+                        secondary: '#C99738',
+                        'secondary-hover': '#E2B258',
+                        neutral: '#0F172A',
+                        'neutral-muted': '#64748B',
+                        'neutral-inactive': '#94A3B8',
+                        canvas: '#F8FAFC',
+                        surface: '#FFFFFF',
+                        border: '#E2E8F0',
+                        'border-focus': '#CBD5E1',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Tamil', 'sans-serif'],
+                        mono: ['Inter', 'Noto Sans Tamil', 'monospace'],
+                    },
+                    boxShadow: {
+                        'fluent-dock': '0 1px 2px 0 rgba(15, 23, 42, 0.04)',
+                        'fluent-flyout': '0 4px 12px 0 rgba(15, 23, 42, 0.08), 0 1px 3px 0 rgba(15, 23, 42, 0.04)',
+                        'fluent-modal': '0 12px 32px 0 rgba(15, 23, 42, 0.12), 0 2px 6px 0 rgba(15, 23, 42, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F8FAFC; }
+        .candidate-key { font-family: 'Inter', 'Noto Sans Tamil', monospace; font-size: 1.125rem; font-weight: 500; }
+        .hidden { display: none !important; }
+    
+    /* Premium Sidebar and Accent Classes */
+    .dark-acrylic-sidebar {
+      background: linear-gradient(180deg, #2a050c 0%, #1e0308 50%, #150205 100%);
+      backdrop-filter: blur(24px);
+    }
+    .acrylic-glass {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 30px -10px rgba(107, 2, 23, 0.07), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #70111d 0%, #a9343f 45%, #b8860b 80%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-badge {
+      background: linear-gradient(135deg, #fff6dd 0%, #fae6b2 50%, #f4d385 100%);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 6px rgba(184, 134, 11, 0.15);
+    }
+    .card-specular { position: relative; }
+    .card-specular::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+      pointer-events: none;
+    }
+
+</style>
+</head>
+<body class="text-neutral h-screen flex overflow-hidden antialiased">
+    
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-8 bottom-0 w-64 dark-acrylic-sidebar text-white/85 flex flex-col z-40 border-r border-[#420a13] shadow-[4px_0_24px_rgba(0,0,0,0.25)]">
+<!-- Header Brand with Tamil Architectural Gold Motif -->
+<div class="p-space-lg flex items-center gap-space-md border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-20 h-20 rounded-full bg-[#d4af37]/10 blur-xl pointer-events-none"></div>
+<div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#8b1e2b] via-[#6b0217] to-[#3a030d] p-0.5 shadow-lg border border-[#d4af37]/40 flex items-center justify-center shrink-0">
+<img alt="Tamil99 Suite Emblem" class="h-7 w-auto object-contain filter drop-shadow" src="https://lh3.googleusercontent.com/aida/AEtjO1Vkz3GftSB_0bEAXtNZFpmHLpuS_5RYRh-rJ02yQQeVJkLR_uHLXHoLSreg6xtZTctjIuPUmQLM_TyOmlpROLQXOweZpFCo5I9qOS3JuMLA-gPJkoIbIT3OyLTYdpol9qBxKrU2SslmCAaOXFzKKL2ts5cWOM6gF_z2X6lzqrAM0zvKcEKPltx-J9pfIzrL9HUYz0HdZTuusKo0YIWDNV2HynLX8g_xHM3fzAdlxJ9ngGRx8oEB5VK-dlY"/>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] text-white leading-tight font-bold tracking-tight">Tamil99 Suite</span>
+<span class="text-[10px] text-[#f5d77f] font-mono px-1 py-0.2 rounded bg-[#d4af37]/20 border border-[#d4af37]/30">PRO</span>
+</div>
+<span class="inline-block self-start mt-0.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#d4af37]/25 to-transparent text-[#f5d77f] font-label-sm text-[10px] font-semibold tracking-wider">
+          தமிழ் ஸ்மார்ட் டைப்பிங்
+        </span>
+</div>
+</div>
+<!-- Nav Items with Metallic & Glowing Accents -->
+<div class="flex-1 overflow-y-auto px-3 py-3 space-y-4">
+<!-- Section 1 -->
+<div class="space-y-1">
+<p class="px-3 font-label-sm text-[10px] font-bold text-white/40 uppercase tracking-widest">Workspace</p>
+<nav class="space-y-1">
+<!-- Active Item with Gold indicator bar and ambient crimson glow -->
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="dashboard" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#f5d77f]">grid_view</span>
+<span class="font-label-lg text-label-lg tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="tamil99-typing" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">keyboard</span>
+<span class="font-label-lg text-label-lg">Tamil99 Typing</span>
+</a>
+<a aria-current="page" class="relative flex items-center gap-3 px-3 py-2 transition-all bg-gradient-to-r from-[#8b1e2b] via-[#6f121d] to-[#4c0913] text-white font-semibold rounded-xl shadow-[0_4px_16px_rgba(139,30,43,0.4)] border border-[#d4af37]/30" data-path="english-to-tamil" href="#">
+<span class="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-[#d4af37] shadow-[0_0_8px_#d4af37]"></span>
+<span class="material-symbols-outlined text-[20px] text-[#f5d77f]">translate</span>
+<span class="font-label-lg text-label-lg tracking-wide">English → Tamil</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-[#d4af37] shadow-[0_0_6px_#d4af37]"></span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="voice-to-text" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">mic</span>
+<span class="font-label-lg text-label-lg">Voice to Text</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="text-editor" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">edit_document</span>
+<span class="font-label-lg text-label-lg">Text Editor</span>
+</a>
+</nav>
+</div>
+<!-- Section 2 -->
+<div class="space-y-1">
+<p class="px-3 font-label-sm text-[10px] font-bold text-white/40 uppercase tracking-widest">Learn &amp; Practice</p>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="learn-tamil" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">school</span>
+<span class="font-label-lg text-label-lg">Learn Tamil</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="typing-practice" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">speed</span>
+<span class="font-label-lg text-label-lg">Typing Practice</span>
+<span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">96 WPM</span>
+</a>
+</nav>
+</div>
+<!-- Section 3 -->
+<div class="space-y-1">
+<p class="px-3 font-label-sm text-[10px] font-bold text-white/40 uppercase tracking-widest">Productivity</p>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="government-forms" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">verified_user</span>
+<span class="font-label-lg text-label-lg">Government Forms</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="documents-pdf" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">picture_as_pdf</span>
+<span class="font-label-lg text-label-lg">Documents &amp; PDF</span>
+</a>
+</nav>
+</div>
+<!-- Section 4 -->
+<div class="space-y-1">
+<p class="px-3 font-label-sm text-[10px] font-bold text-white/40 uppercase tracking-widest">Developer &amp; System</p>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="keyboard-api-sdk" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">code</span>
+<span class="font-label-lg text-label-lg">Keyboard API &amp; SDK</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="settings" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all group" data-path="help-support" href="#">
+<span class="material-symbols-outlined text-[20px] text-white/50 group-hover:text-[#f5d77f] transition-colors">help</span>
+<span class="font-label-lg text-label-lg">Help &amp; Support</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Sidebar Bottom Profile / Telemetry Badge -->
+<div class="p-3 bg-gradient-to-t from-black/60 to-transparent border-t border-white/10 space-y-2">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]"></span>
+<span class="font-label-sm text-[11px] text-white/70 font-medium">Engine v2.4 Active</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#271900] font-label-sm text-[10px] font-extrabold shadow-sm">
+          Tamil99 IME
+        </span>
+</div>
+<div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#d4af37] to-[#8b1e2b] flex items-center justify-center shrink-0 shadow-md">
+<span class="material-symbols-outlined text-white text-[17px]">person</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-label-md text-[12px] text-white font-semibold truncate leading-tight">Kavitha R. (Govt. Dept)</span>
+<span class="font-label-sm text-[10px] text-[#f5d77f] font-medium truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-[11px] text-[#d4af37]">verified</span> Enterprise License
+          </span>
+</div>
+</div>
+</div>
+</aside>  
+ 
+
+    <!-- Main Workspace -->
+    <div class="flex-1 w-full h-full flex flex-col pl-64">
+    <main class="flex-1 flex flex-col h-full bg-[#F1F5F9] p-6 relative">
+        
+        <!-- TYPING ENVIRONMENT SECTION -->
+        <div id="section-typing" class="section-content flex flex-col h-full space-y-6">
+            
+            <!-- Premium Header Card -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#2a050c] via-[#4c0913] to-[#8b1e2b] shadow-lg border border-[#d4af37]/20">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-[#d4af37]/10 blur-3xl rounded-full pointer-events-none"></div>
+                <div class="relative p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="material-symbols-outlined text-[28px] text-[#f5d77f]">translate</span>
+                            <h1 class="text-3xl font-bold text-white tracking-tight">English → Tamil Engine</h1>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
+                                Neural Predictor Active
+                            </span>
+                            <p id="mode-status" class="text-sm text-white/70 font-medium">Anjal Phonetic Layout • Predictive Mode On</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 bg-black/40 backdrop-blur-md rounded-xl p-1 border border-white/10 shadow-inner">
+                        <button id="btn-anjal" class="layout-toggle px-5 py-2 rounded-lg bg-gradient-to-b from-[#d4af37] to-[#b8860b] text-[#271900] text-sm font-bold shadow-[0_2px_10px_rgba(212,175,55,0.3)] transition-all transform hover:scale-[1.02]">Anjal (Phonetic)</button>
+                        <button id="btn-tamil99" class="layout-toggle px-5 py-2 rounded-lg bg-transparent text-white/70 text-sm font-medium hover:text-white transition-colors">Tamil99 (Direct)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Editor Area -->
+            <div class="flex-1 bg-white rounded-2xl border border-border shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group">
+                <!-- Toolbar -->
+                <div class="flex items-center justify-between px-6 py-3 border-b border-slate-100 bg-slate-50/50">
+                    <div class="flex items-center gap-2">
+                        <button class="p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-red-50 transition-colors" title="Undo"><span class="material-symbols-outlined text-[20px]">undo</span></button>
+                        <button class="p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-red-50 transition-colors" title="Redo"><span class="material-symbols-outlined text-[20px]">redo</span></button>
+                        <div class="w-px h-5 bg-slate-200 mx-2"></div>
+                        <select class="bg-transparent text-sm font-medium text-slate-600 focus:outline-none cursor-pointer">
+                            <option>Noto Sans Tamil</option>
+                            <option>Latha</option>
+                            <option>Vijaya</option>
+                        </select>
+                        <div class="w-px h-5 bg-slate-200 mx-2"></div>
+                        <button class="p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-red-50 transition-colors" title="Bold"><span class="material-symbols-outlined text-[20px]">format_bold</span></button>
+                        <button class="p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-red-50 transition-colors" title="Italic"><span class="material-symbols-outlined text-[20px]">format_italic</span></button>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button id="action-clear-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 text-sm font-medium transition-colors">
+                            <span class="material-symbols-outlined text-[18px]">delete</span> Clear
+                        </button>
+                        <button id="action-copy-btn" class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white text-sm font-bold transition-all">
+                            <span class="material-symbols-outlined text-[18px]">content_copy</span> Copy Text
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Textarea -->
+                <textarea id="main-textarea" class="w-full h-full resize-none outline-none text-2xl leading-relaxed p-8 placeholder:text-slate-300 font-sans text-slate-800 focus:ring-inset focus:ring-0 transition-all" placeholder="Start typing in English to automatically translate to Tamil... (e.g., 'vanakkam')"></textarea>
+                
+                <!-- Character & Word Count -->
+                <div class="absolute bottom-4 right-6 flex items-center gap-4 text-xs font-medium text-slate-400 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full border border-slate-100 shadow-sm pointer-events-none">
+                    <span><span id="word-count" class="text-slate-600 font-bold">0</span> words</span>
+                    <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                    <span><span id="char-count" class="text-slate-600 font-bold">0</span> characters</span>
+                </div>
+                
+                <!-- IME Candidate Ribbon (Floating, Premium Style) -->
+                <div id="candidate-ribbon" class="hidden absolute bottom-16 left-1/2 transform -translate-x-1/2 bg-white rounded-xl border border-primary/20 shadow-[0_20px_40px_-10px_rgba(139,30,43,0.15)] flex items-stretch overflow-visible transition-all duration-300 scale-95 origin-bottom">
+                    <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-primary/20 rotate-45 z-[-1]"></div>
+                    <div id="cand-1" class="candidate-item flex flex-col justify-center px-6 py-3 hover:bg-slate-50 cursor-pointer border-r border-slate-100 transition-colors rounded-l-xl">
+                        <span class="text-[10px] text-slate-400 font-bold mb-0.5 uppercase tracking-wider">Option 1</span>
+                        <span class="candidate-key text-slate-700 text-lg"></span>
+                    </div>
+                    <div id="cand-2" class="candidate-item flex flex-col justify-center px-8 py-3 bg-gradient-to-b from-[#8b1e2b] to-[#6b0217] text-white cursor-pointer border-r border-primary transition-colors transform scale-110 shadow-lg relative z-10">
+                        <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 py-0.5 bg-[#d4af37] text-[#271900] text-[9px] font-black rounded-full shadow-sm whitespace-nowrap">BEST MATCH (2)</span>
+                        <span class="candidate-key text-xl font-bold mt-1"></span>
+                    </div>
+                    <div id="cand-3" class="candidate-item flex flex-col justify-center px-6 py-3 hover:bg-slate-50 cursor-pointer border-r border-slate-100 transition-colors">
+                        <span class="text-[10px] text-slate-400 font-bold mb-0.5 uppercase tracking-wider">Option 3</span>
+                        <span class="candidate-key text-slate-700 text-lg"></span>
+                    </div>
+                    
+                    <!-- 3-Dot Options Button -->
+                    <div id="more-options-btn" class="flex items-center justify-center px-4 hover:bg-slate-50 cursor-pointer text-slate-400 relative rounded-r-xl transition-colors">
+                        <span class="material-symbols-outlined">more_vert</span>
+                        
+                        <!-- Flyout Menu -->
+                        <div id="more-options-menu" class="hidden absolute bottom-full mb-3 right-0 bg-white border border-slate-200 rounded-xl shadow-xl w-56 text-left z-50 overflow-hidden">
+                            <div class="px-4 py-2 bg-slate-50 border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-wider">Dictionary Options</div>
+                            <div id="action-add-dict" class="px-4 py-3 hover:bg-primary/5 text-sm text-primary cursor-pointer flex items-center gap-3 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">library_add</span> Add exact word to Lexicon
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEXICON SECTION -->
+        <div id="section-lexicon" class="section-content hidden flex flex-col h-full">
+            <header class="mb-6 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-semibold text-neutral tracking-tight">Lexicon & Dictionary</h1>
+                    <p class="text-sm text-neutral-muted mt-1">Manage custom words and autocorrect</p>
+                </div>
+                <button id="add-word-btn" class="px-4 py-1.5 rounded-md bg-primary text-white text-sm font-medium shadow-sm hover:bg-primary-hover transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">add</span> Add Word
+                </button>
+            </header>
+            <div class="flex-1 bg-white rounded-xl border border-border shadow-fluent-dock p-6 flex flex-col relative overflow-hidden">
+                <div id="empty-lexicon" class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <span class="material-symbols-outlined text-6xl text-neutral-inactive mb-4">menu_book</span>
+                    <h2 class="text-xl font-medium text-neutral">Your Personal Dictionary is Empty</h2>
+                    <p class="text-neutral-muted mt-2 max-w-md">Words you add to your custom dictionary will appear here, and will be prioritized in the typing candidate ribbon.</p>
+                </div>
+                <div id="lexicon-list" class="hidden w-full h-full overflow-y-auto pr-2">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-border text-neutral-muted text-sm">
+                                <th class="pb-3 font-medium">Tamil Word</th>
+                                <th class="pb-3 font-medium">Shortcut / Tanglish</th>
+                                <th class="pb-3 font-medium text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lexicon-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREFERENCES SECTION -->
+        <div id="section-settings" class="section-content hidden flex flex-col h-full">
+            <header class="mb-6">
+                <h1 class="text-2xl font-semibold text-neutral tracking-tight">Preferences</h1>
+                <p class="text-sm text-neutral-muted mt-1">System and typing behavior settings</p>
+            </header>
+            <div class="flex-1 bg-white rounded-xl border border-border shadow-fluent-dock p-6 space-y-6">
+                
+                <div class="flex justify-between items-center pb-6 border-b border-border">
+                    <div>
+                        <h3 class="text-lg font-medium text-neutral">Predictive Typing</h3>
+                        <p class="text-sm text-neutral-muted">Suggest words dynamically as you type.</p>
+                    </div>
+                    <div id="toggle-predictive" class="w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner" data-state="on">
+                        <div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center pb-6 border-b border-border">
+                    <div>
+                        <h3 class="text-lg font-medium text-neutral">Auto-correct English to Tamil</h3>
+                        <p class="text-sm text-neutral-muted">Automatically convert tanglish to tamil characters when you press Space.</p>
+                    </div>
+                    <div id="toggle-autocorrect" class="w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner" data-state="on">
+                        <div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    </div>
+
+    <!-- Basic Phonetic Transliteration Engine -->
+    <script>
+        // Very basic dictionary for Anjal prototype
+        const basicDictionary = {
+            "amma": "அம்மா", "appa": "அப்பா", "thambi": "தம்பி", "thangachi": "தங்கச்சி",
+            "nanban": "நண்பன்", "vanakkam": "வணக்கம்", "tamil": "தமிழ்", "tamilargal": "தமிழர்கள்",
+            "nandri": "நன்றி", "kaalai": "காலை", "maalai": "மாலை", "iravu": "இரவு",
+            "palli": "பள்ளி", "veedu": "வீடு", "saappadu": "சாப்பாடு", "thanni": "தண்ணி"
+        };
+        
+        // Simple map for basic letters (highly simplified for prototype)
+        const charMap = {
+            'a': 'அ', 'aa': 'ஆ', 'i': 'இ', 'ii': 'ஈ', 'u': 'உ', 'uu': 'ஊ', 'e': 'எ', 'ee': 'ஏ', 'ai': 'ஐ', 'o': 'ஒ', 'oo': 'ஓ', 'au': 'ஔ',
+            'k': 'க்', 'ka': 'க', 'ng': 'ங்', 'nga': 'ங', 'c': 'ச்', 'ca': 'ச', 'ch': 'ச்', 'cha': 'ச', 'nj': 'ஞ்', 'nja': 'ஞ',
+            't': 'ட்', 'ta': 'ட', 'n': 'ந்', 'na': 'ந', 'th': 'த்', 'tha': 'த', 'p': 'ப்', 'pa': 'ப', 'm': 'ம்', 'ma': 'ம',
+            'y': 'ய்', 'ya': 'ய', 'r': 'ர்', 'ra': 'ர', 'l': 'ல்', 'la': 'ல', 'v': 'வ்', 'va': 'வ',
+            'zh': 'ழ்', 'zha': 'ழ', 'L': 'ள்', 'La': 'ள', 'R': 'ற்', 'Ra': 'ற', 'N': 'ன்', 'Na': 'ன'
+        };
+
+        function transliterate(word) {
+            word = word.toLowerCase();
+            if (basicDictionary[word]) return basicDictionary[word];
+            
+            // Fallback: very rough character replacement for prototype
+            let result = word;
+            const sortedKeys = Object.keys(charMap).sort((a,b) => b.length - a.length);
+            for(let key of sortedKeys) {
+                result = result.split(key).join(charMap[key]);
+            }
+            return result;
+        }
+
+        function generateCandidates(word) {
+            if(!word || word.trim() === '') return [];
+            word = word.toLowerCase();
+            
+            // Check custom lexicon first
+            let customMatches = lexicon.filter(l => l.tanglish.toLowerCase().startsWith(word)).map(l => l.tamil);
+            
+            let exactMatch = transliterate(word);
+            let candidates = [exactMatch];
+            
+            // Add custom matches if any
+            customMatches.forEach(m => {
+                if(!candidates.includes(m)) candidates.push(m);
+            });
+            
+            // Fallback suggestions
+            if (word.startsWith('tam')) {
+                if(!candidates.includes('தமிழ்')) candidates.push('தமிழ்');
+                if(!candidates.includes('தமிழர்கள்')) candidates.push('தமிழர்கள்');
+                if(!candidates.includes('தமிழகம்')) candidates.push('தமிழகம்');
+            }
+            if (word.startsWith('am')) {
+                if(!candidates.includes('அம்மா')) candidates.push('அம்மா');
+                if(!candidates.includes('அம்பு')) candidates.push('அம்பு');
+            }
+            
+            // Fill with generic to ensure we have 3
+            while(candidates.length < 3) {
+                candidates.push(exactMatch + (candidates.length)); // Dummy variation
+            }
+            
+            return candidates.slice(0,3);
+        }
+
+        // State
+        let mode = 'anjal'; // 'anjal' or 'tamil99'
+        let isPredictive = true;
+        let isAutocorrect = true;
+        let currentWord = '';
+        let lexicon = JSON.parse(localStorage.getItem('fluent_lexicon')) || [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Navigation ---
+            const sections = {
+                'nav-typing': document.getElementById('section-typing'),
+                'nav-lexicon': document.getElementById('section-lexicon'),
+                'nav-settings': document.getElementById('section-settings')
+            };
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.nav-btn').forEach(b => {
+                        b.classList.remove('bg-white', 'border', 'border-border', 'shadow-fluent-dock');
+                        b.classList.add('text-neutral-muted', 'hover:bg-white/50');
+                        const icon = b.querySelector('.material-symbols-outlined');
+                        if(icon) icon.classList.remove('text-primary');
+                    });
+                    btn.classList.add('bg-white', 'border', 'border-border', 'shadow-fluent-dock');
+                    btn.classList.remove('text-neutral-muted', 'hover:bg-white/50');
+                    const activeIcon = btn.querySelector('.material-symbols-outlined');
+                    if(activeIcon) activeIcon.classList.add('text-primary');
+
+                    Object.values(sections).forEach(sec => sec.classList.add('hidden'));
+                    sections[btn.id].classList.remove('hidden');
+                    
+                    if(btn.id === 'nav-lexicon') renderLexicon();
+                });
+            });
+
+            // --- Layout Toggle ---
+            const btnAnjal = document.getElementById('btn-anjal');
+            const btnTamil99 = document.getElementById('btn-tamil99');
+            const modeStatus = document.getElementById('mode-status');
+
+            function setMode(newMode) {
+                mode = newMode;
+                if(mode === 'anjal') {
+                    btnAnjal.className = "layout-toggle px-4 py-1.5 rounded-md bg-primary text-white text-sm font-medium shadow-sm transition-colors";
+                    btnTamil99.className = "layout-toggle px-4 py-1.5 rounded-md bg-canvas text-neutral-muted text-sm font-medium transition-colors";
+                    modeStatus.innerText = `Anjal Phonetic Layout • Predictive Mode ${isPredictive ? 'On' : 'Off'}`;
+                } else {
+                    btnTamil99.className = "layout-toggle px-4 py-1.5 rounded-md bg-primary text-white text-sm font-medium shadow-sm transition-colors";
+                    btnAnjal.className = "layout-toggle px-4 py-1.5 rounded-md bg-canvas text-neutral-muted text-sm font-medium transition-colors";
+                    modeStatus.innerText = `Tamil99 Layout • Predictive Mode ${isPredictive ? 'On' : 'Off'}`;
+                }
+            }
+
+            btnAnjal.addEventListener('click', () => setMode('anjal'));
+            btnTamil99.addEventListener('click', () => setMode('tamil99'));
+
+            // --- Editor Logic ---
+            const textarea = document.getElementById('main-textarea');
+            const candidateRibbon = document.getElementById('candidate-ribbon');
+            const cands = [
+                document.querySelector('#cand-1 .candidate-key'),
+                document.querySelector('#cand-2 .candidate-key'),
+                document.querySelector('#cand-3 .candidate-key')
+            ];
+
+            function updateCandidates() {
+                if (!isPredictive || currentWord.length === 0) {
+                    candidateRibbon.classList.add('hidden');
+                    return;
+                }
+                const predictions = generateCandidates(currentWord);
+                if (predictions.length > 0) {
+                    cands[0].innerText = predictions[0] || '';
+                    cands[1].innerText = predictions[1] || '';
+                    cands[2].innerText = predictions[2] || '';
+                    candidateRibbon.classList.remove('hidden');
+                } else {
+                    candidateRibbon.classList.add('hidden');
+                }
+            }
+
+            textarea.addEventListener('input', (e) => {
+                const text = textarea.value;
+                const words = text.split(/[\s\n]+/);
+                currentWord = words[words.length - 1];
+                updateCandidates();
+            });
+
+            textarea.addEventListener('keydown', (e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    if (isAutocorrect && currentWord.length > 0 && mode === 'anjal') {
+                        e.preventDefault();
+                        const predictions = generateCandidates(currentWord);
+                        const bestMatch = predictions[1] || predictions[0]; // Center candidate is primary
+                        
+                        // Replace current tanglish word with bestMatch
+                        const text = textarea.value;
+                        const newText = text.substring(0, text.length - currentWord.length) + bestMatch + (e.key === 'Enter' ? '\n' : ' ');
+                        textarea.value = newText;
+                        currentWord = '';
+                        updateCandidates();
+                    }
+                }
+                // Handle number keys 1, 2, 3 to select candidate
+                if (['1', '2', '3'].includes(e.key) && !candidateRibbon.classList.contains('hidden')) {
+                    e.preventDefault();
+                    const selected = cands[parseInt(e.key) - 1].innerText;
+                    const text = textarea.value;
+                    textarea.value = text.substring(0, text.length - currentWord.length) + selected + ' ';
+                    currentWord = '';
+                    updateCandidates();
+                }
+            });
+
+            // Ribbon Clicks
+            document.querySelectorAll('.candidate-item').forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    const selected = cands[index].innerText;
+                    const text = textarea.value;
+                    textarea.value = text.substring(0, text.length - currentWord.length) + selected + ' ';
+                    currentWord = '';
+                    updateCandidates();
+                    textarea.focus();
+                });
+            });
+
+            // --- More Options (3-Dot) ---
+            const moreBtn = document.getElementById('more-options-btn');
+            const moreMenu = document.getElementById('more-options-menu');
+            
+            moreBtn.addEventListener('click', (e) => {
+                moreMenu.classList.toggle('hidden');
+                e.stopPropagation();
+            });
+            document.addEventListener('click', (e) => {
+                if (!moreBtn.contains(e.target)) moreMenu.classList.add('hidden');
+            });
+
+            document.getElementById('action-copy-btn').addEventListener('click', () => {
+                navigator.clipboard.writeText(textarea.value);
+                alert('Copied to clipboard!');
+            });
+            document.getElementById('action-clear-btn').addEventListener('click', () => {
+                textarea.value = '';
+                currentWord = '';
+                updateCandidates();
+            });
+            document.getElementById('action-add-dict').addEventListener('click', () => {
+                if(currentWord) {
+                    const transliterated = generateCandidates(currentWord)[0];
+                    lexicon.push({ tanglish: currentWord, tamil: transliterated });
+                    localStorage.setItem('fluent_lexicon', JSON.stringify(lexicon));
+                    alert(`Added ${currentWord} -> ${transliterated} to dictionary!`);
+                }
+            });
+
+            // --- Lexicon Management ---
+            function renderLexicon() {
+                const emptyState = document.getElementById('empty-lexicon');
+                const listState = document.getElementById('lexicon-list');
+                const tbody = document.getElementById('lexicon-tbody');
+                
+                if (lexicon.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    listState.classList.add('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    listState.classList.remove('hidden');
+                    tbody.innerHTML = '';
+                    lexicon.forEach((item, idx) => {
+                        const tr = document.createElement('tr');
+                        tr.className = "border-b border-border/50";
+                        tr.innerHTML = `
+                            <td class="py-3 text-neutral font-medium">${item.tamil}</td>
+                            <td class="py-3 text-neutral-muted">${item.tanglish}</td>
+                            <td class="py-3 text-right">
+                                <button class="delete-lexicon text-red-500 hover:bg-red-50 p-1 rounded transition-colors" data-idx="${idx}">
+                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                                </button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    document.querySelectorAll('.delete-lexicon').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const idx = e.currentTarget.getAttribute('data-idx');
+                            lexicon.splice(idx, 1);
+                            localStorage.setItem('fluent_lexicon', JSON.stringify(lexicon));
+                            renderLexicon();
+                        });
+                    });
+                }
+            }
+
+            document.getElementById('add-word-btn').addEventListener('click', () => {
+                const tanglish = prompt("Enter the English/Tanglish shortcut:");
+                if(tanglish) {
+                    const tamil = prompt("Enter the exact Tamil word for it:");
+                    if(tamil) {
+                        lexicon.push({ tanglish, tamil });
+                        localStorage.setItem('fluent_lexicon', JSON.stringify(lexicon));
+                        renderLexicon();
+                    }
+                }
+            });
+
+            // --- Settings ---
+            function toggleSwitch(sw) {
+                const state = sw.getAttribute('data-state');
+                if (state === 'on') {
+                    sw.setAttribute('data-state', 'off');
+                    sw.className = "w-12 h-6 bg-canvas border border-border rounded-full relative cursor-pointer transition-colors";
+                    sw.innerHTML = '<div class="absolute left-1 top-1 w-4 h-4 bg-neutral-muted rounded-full shadow-sm transition-all"></div>';
+                    return false;
+                } else {
+                    sw.setAttribute('data-state', 'on');
+                    sw.className = "w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner transition-colors";
+                    sw.innerHTML = '<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all"></div>';
+                    return true;
+                }
+            }
+
+            document.getElementById('toggle-predictive').addEventListener('click', (e) => {
+                isPredictive = toggleSwitch(e.currentTarget);
+                setMode(mode); // refresh status text
+            });
+            document.getElementById('toggle-autocorrect').addEventListener('click', (e) => {
+                isAutocorrect = toggleSwitch(e.currentTarget);
+            });
+        });
+    </script>
+<script src="../router.js"></script></body>
+</html>
