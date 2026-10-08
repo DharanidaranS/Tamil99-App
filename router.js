@@ -100,6 +100,3 @@
         initRouting();
     }
 })();
-initRouting();
-    }
-}) ();

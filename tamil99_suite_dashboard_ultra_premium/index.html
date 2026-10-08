@@ -1309,221 +1309,30 @@
             <!-- Live Typing Engine Script -->
 
             <script src="../router.js"></script>
-            <script>
-                (function () {
-                    console.log("Production Pages Engine Loaded V2");
+            
 
-                    function initDashboard() {
-                        const mainArea = document.querySelector('main') || document.querySelector('.flex-1');
-                        if (!mainArea) return;
 
-                        if (!document.getElementById('section-dashboard')) {
-                            const originalContent = Array.from(mainArea.children);
-                            const dashboardWrapper = document.createElement('div');
-                            dashboardWrapper.id = 'section-dashboard';
-                            dashboardWrapper.className = 'page-section w-full h-full';
+<script>
+(function() {
+    console.log("Production Pages Engine Loaded V2");
+    
+    function initDashboard() {
+        const mainArea = document.querySelector('main') || document.querySelector('.flex-1');
+        if (!mainArea) return;
 
-                            originalContent.forEach(child => {
-                                if (child.tagName !== 'SCRIPT') dashboardWrapper.appendChild(child);
-                            });
-                            mainArea.appendChild(dashboardWrapper);
+        if (!document.getElementById('section-dashboard')) {
+            const originalContent = Array.from(mainArea.children);
+            const dashboardWrapper = document.createElement('div');
+            dashboardWrapper.id = 'section-dashboard';
+            dashboardWrapper.className = 'page-section w-full h-full';
+            
+            originalContent.forEach(child => {
+                if (child.tagName !== 'SCRIPT') dashboardWrapper.appendChild(child);
+            });
+            mainArea.appendChild(dashboardWrapper);
 
-                            const sectionsHTML = {
-
-                                'keyboard-api-sdk': `
-                    <div id="section-keyboard-api-sdk" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
-                        <header class="mb-6">
-                            <h1 class="text-3xl font-bold text-neutral">Keyboard API & SDK</h1>
-                            <p class="text-neutral-muted mt-1">Documentation and developer tools for the Tamil99 Engine.</p>
-                        </header>
-                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8 flex items-center justify-center text-center">
-                            <div>
-                                <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block">api</span>
-                                <h2 class="text-xl font-bold text-neutral">Developer Portal Coming Soon</h2>
-                                <p class="text-neutral-muted mt-2 max-w-md mx-auto">Access to the native OS-level Keyboard Hook API and web SDKs will be available in the next release.</p>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                                'settings': `
-                    <div id="section-settings" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9] overflow-y-auto">
-                        <header class="mb-8">
-                            <h1 class="text-3xl font-bold text-neutral tracking-tight">System Settings</h1>
-                            <p class="text-neutral-muted mt-1 font-medium">Configure your suite preferences, theme, and keyboard behavior.</p>
-                        </header>
-                        <div class="flex-1 max-w-4xl space-y-6 pb-12">
-                            
-                            <!-- Appearance & General -->
-                            <section class="bg-white rounded-2xl shadow-sm border border-border p-6">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <span class="material-symbols-outlined text-primary text-2xl">palette</span>
-                                    <h2 class="text-xl font-bold text-neutral">Appearance & General</h2>
-                                </div>
-                                <div class="space-y-5">
-                                    <div class="flex items-center justify-between border-b border-border/50 pb-5">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Theme Preference</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Choose between Light, Dark, or sync with System.</p>
-                                        </div>
-                                        <div class="flex bg-canvas rounded-lg p-1 border border-border">
-                                            <button class="px-4 py-1.5 rounded bg-white shadow-sm text-sm font-semibold text-primary">Light</button>
-                                            <button class="px-4 py-1.5 rounded text-sm font-medium text-neutral-muted hover:text-neutral">Dark</button>
-                                            <button class="px-4 py-1.5 rounded text-sm font-medium text-neutral-muted hover:text-neutral">System</button>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between border-b border-border/50 pb-5">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Launch on Startup</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Automatically start the Tamil99 Engine when Windows boots.</p>
-                                        </div>
-                                        <div class="w-11 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">System Tray Icon</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Show quick toggle icon in the Windows taskbar tray.</p>
-                                        </div>
-                                        <div class="w-11 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <!-- Keyboard Engine & Typing -->
-                            <section class="bg-white rounded-2xl shadow-sm border border-border p-6">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <span class="material-symbols-outlined text-primary text-2xl">keyboard</span>
-                                    <h2 class="text-xl font-bold text-neutral">Keyboard Engine & Typing</h2>
-                                </div>
-                                <div class="space-y-5">
-                                    <div class="flex items-center justify-between border-b border-border/50 pb-5">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Default Engine Layout</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Select your primary typing layout on launch.</p>
-                                        </div>
-                                        <select class="bg-canvas border border-border text-sm font-medium rounded-lg px-4 py-2 focus:outline-none focus:border-primary">
-                                            <option>Tamil99 Direct</option>
-                                            <option>Phonetic / Tanglish</option>
-                                            <option>Bilingual (Auto-Detect)</option>
-                                        </select>
-                                    </div>
-                                    <div class="flex items-center justify-between border-b border-border/50 pb-5">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Smart Ligature Resolution</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Automatically format complex Tamil character combinations instantly.</p>
-                                        </div>
-                                        <div class="w-11 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
-                                    </div>
-                                    <div class="flex items-center justify-between border-b border-border/50 pb-5">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Auto-Pulli (க்) Injection</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Inject Pulli automatically for consecutive consonants to speed up typing.</p>
-                                        </div>
-                                        <div class="w-11 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Predictive Text & Auto-Complete</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Show AI-powered word suggestions above the text cursor.</p>
-                                        </div>
-                                        <div class="w-11 h-6 bg-slate-300 rounded-full relative cursor-pointer shadow-inner"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <!-- Shortcuts & Hotkeys -->
-                            <section class="bg-white rounded-2xl shadow-sm border border-border p-6">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <span class="material-symbols-outlined text-primary text-2xl">keyboard_command_key</span>
-                                    <h2 class="text-xl font-bold text-neutral">Shortcuts & Hotkeys</h2>
-                                </div>
-                                <div class="space-y-4">
-                                    <div class="flex items-center justify-between border border-border/60 rounded-xl p-4 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Global Language Toggle</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Switch between English and Tamil instantly anywhere in Windows.</p>
-                                        </div>
-                                        <kbd class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg shadow-sm font-mono text-sm font-bold text-slate-700">Win + Space</kbd>
-                                    </div>
-                                    <div class="flex items-center justify-between border border-border/60 rounded-xl p-4 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Open Typing Studio</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Quickly launch the distraction-free typing studio.</p>
-                                        </div>
-                                        <kbd class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg shadow-sm font-mono text-sm font-bold text-slate-700">Ctrl + Alt + T</kbd>
-                                    </div>
-                                    <div class="flex items-center justify-between border border-border/60 rounded-xl p-4 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                                        <div>
-                                            <h3 class="font-bold text-neutral text-sm">Voice-to-Text Dictation</h3>
-                                            <p class="text-xs text-neutral-muted mt-0.5">Start listening for Tamil speech dictation.</p>
-                                        </div>
-                                        <kbd class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg shadow-sm font-mono text-sm font-bold text-slate-700">Win + H</kbd>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <!-- Account & Sync -->
-                            <section class="bg-white rounded-2xl shadow-sm border border-border p-6">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex items-center gap-3">
-                                        <span class="material-symbols-outlined text-primary text-2xl">cloud_sync</span>
-                                        <h2 class="text-xl font-bold text-neutral">Account & Cloud Sync</h2>
-                                    </div>
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                        Synced
-                                    </span>
-                                </div>
-                                <div class="flex items-center p-4 bg-[#f8f0f1] rounded-xl border border-primary/20 gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-[#6b0217] flex items-center justify-center text-white font-bold text-lg shadow-md">K</div>
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-neutral text-sm">Kavitha R.</h3>
-                                        <p class="text-xs text-neutral-muted mt-0.5">kavitha.r@tn.gov.in (Enterprise License)</p>
-                                    </div>
-                                    <button class="px-4 py-2 border border-border bg-white rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">Manage Account</button>
-                                </div>
-                                <div class="mt-5 flex items-center justify-between border-t border-border/50 pt-5">
-                                    <div>
-                                        <h3 class="font-bold text-neutral text-sm">Sync Custom Dictionary & Layouts</h3>
-                                        <p class="text-xs text-neutral-muted mt-0.5">Keep your custom words and settings backed up to the TN Gov Intranet.</p>
-                                    </div>
-                                    <button class="text-primary text-sm font-bold hover:underline">Sync Now</button>
-                                </div>
-                            </section>
-                            
-                            <!-- Danger Zone -->
-                            <section class="bg-white rounded-2xl shadow-sm border border-red-200 p-6">
-                                <h2 class="text-lg font-bold text-red-600 mb-2">Danger Zone</h2>
-                                <p class="text-xs text-neutral-muted mb-5">Irreversible destructive actions.</p>
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h3 class="font-bold text-neutral text-sm">Factory Reset Suite</h3>
-                                        <p class="text-xs text-neutral-muted mt-0.5">Erase all custom hotkeys, dictionaries, and local preferences.</p>
-                                    </div>
-                                    <button class="px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg text-sm font-semibold hover:bg-red-100 transition-colors">Reset to Defaults</button>
-                                </div>
-                            </section>
-
-                        </div>
-                    </div>
-                `,
-                                'help-support': `
-                    <div id="section-help-support" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
-                        <header class="mb-6">
-                            <h1 class="text-3xl font-bold text-neutral">Help & Support</h1>
-                            <p class="text-neutral-muted mt-1">Get assistance and read documentation.</p>
-                        </header>
-                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8 flex items-center justify-center text-center">
-                            <div>
-                                <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block">support_agent</span>
-                                <h2 class="text-xl font-bold text-neutral">Enterprise Support</h2>
-                                <p class="text-neutral-muted mt-2 max-w-md mx-auto">Please contact your State Department IT Admin for technical assistance with the Tamil99 Suite.</p>
-                                <button class="mt-6 px-6 py-2 bg-primary text-white rounded-lg shadow font-medium">Contact IT Desk</button>
-                            </div>
-                        </div>
-                    </div>
-                `,
-
-                                'voice-to-text': `
+            const sectionsHTML = {
+                'voice-to-text': `
                     <div id="section-voice-to-text" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
                         <header class="mb-6 flex justify-between items-center">
                             <div>
@@ -1552,7 +1361,7 @@
                         </div>
                     </div>
                 `,
-                                'text-editor': `
+                'text-editor': `
                     <div id="section-text-editor" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
                         <header class="mb-6 flex justify-between items-center">
                             <div>
@@ -1581,7 +1390,7 @@
                         </div>
                     </div>
                 `,
-                                'learn-tamil': `
+                'learn-tamil': `
                     <div id="section-learn-tamil" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9] overflow-y-auto">
                         <header class="mb-8">
                             <h1 class="text-3xl font-bold text-neutral">Learn Tamil</h1>
@@ -1595,7 +1404,7 @@
                         </div>
                     </div>
                 `,
-                                'typing-practice': `
+                'typing-practice': `
                     <div id="section-typing-practice" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
                         <header class="mb-6 flex justify-between items-center">
                             <div>
@@ -1612,7 +1421,7 @@
                         </div>
                     </div>
                 `,
-                                'gov-forms': `
+                'gov-forms': `
                     <div id="section-gov-forms" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
                         <header class="mb-8 flex justify-between items-center">
                             <div><h1 class="text-3xl font-bold text-neutral">Government Forms</h1></div>
@@ -1627,7 +1436,7 @@
                         </div>
                     </div>
                 `,
-                                'docs-pdf': `
+                'docs-pdf': `
                     <div id="section-docs-pdf" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
                         <header class="mb-6 flex justify-between items-center">
                             <div><h1 class="text-3xl font-bold text-neutral">Documents & PDF</h1></div>
@@ -1636,37 +1445,175 @@
                             <div class="bg-white rounded-xl border border-border shadow-sm p-4 text-center"><div class="w-20 h-24 bg-red-100 rounded mb-4 mx-auto flex items-center justify-center border border-red-200"><span class="material-symbols-outlined text-red-600 text-4xl">picture_as_pdf</span></div><h4 class="font-medium text-neutral text-sm">Letter_to_Editor.pdf</h4></div>
                         </div>
                     </div>
+                `,
+                'keyboard-api-sdk': `
+                    <div id="section-keyboard-api-sdk" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
+                        <header class="mb-6">
+                            <h1 class="text-3xl font-bold text-neutral">Keyboard API & SDK</h1>
+                            <p class="text-neutral-muted mt-1">Documentation and developer tools for the Tamil99 Engine.</p>
+                        </header>
+                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8 flex items-center justify-center text-center">
+                            <div>
+                                <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block">api</span>
+                                <h2 class="text-xl font-bold text-neutral">Developer Portal Coming Soon</h2>
+                                <p class="text-neutral-muted mt-2 max-w-md mx-auto">Access to the native OS-level Keyboard Hook API and web SDKs will be available in the next release.</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'settings': `
+                    <div id="section-settings" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
+                        <header class="mb-6">
+                            <h1 class="text-3xl font-bold text-neutral">Settings</h1>
+                            <p class="text-neutral-muted mt-1">Configure your suite preferences and keyboard behavior.</p>
+                        </header>
+                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8">
+                            <div class="space-y-6 max-w-2xl">
+                                <div class="flex items-center justify-between border-b border-border pb-4">
+                                    <div><h3 class="font-bold text-neutral">Smart Ligature Resolution</h3><p class="text-sm text-neutral-muted">Automatically resolve complex Tamil character combinations.</p></div>
+                                    <div class="w-10 h-6 bg-primary rounded-full relative"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div></div>
+                                </div>
+                                <div class="flex items-center justify-between border-b border-border pb-4">
+                                    <div><h3 class="font-bold text-neutral">Auto-Pulli (க்) Injection</h3><p class="text-sm text-neutral-muted">Inject Pulli automatically for consecutive consonants.</p></div>
+                                    <div class="w-10 h-6 bg-primary rounded-full relative"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'help-support': `
+                    <div id="section-help-support" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
+                        <header class="mb-6">
+                            <h1 class="text-3xl font-bold text-neutral">Help & Support</h1>
+                            <p class="text-neutral-muted mt-1">Get assistance and read documentation.</p>
+                        </header>
+                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8 flex items-center justify-center text-center">
+                            <div>
+                                <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block">support_agent</span>
+                                <h2 class="text-xl font-bold text-neutral">Enterprise Support</h2>
+                                <p class="text-neutral-muted mt-2 max-w-md mx-auto">Please contact your State Department IT Admin for technical assistance with the Tamil99 Suite.</p>
+                                <button class="mt-6 px-6 py-2 bg-primary text-white rounded-lg shadow font-medium">Contact IT Desk</button>
+                            </div>
+                        </div>
+                    </div>
                 `
-                            };
+            };
 
-                            Object.keys(sectionsHTML).forEach(key => {
-                                mainArea.insertAdjacentHTML('beforeend', sectionsHTML[key]);
-                            });
-                        }
+            Object.keys(sectionsHTML).forEach(key => {
+                mainArea.insertAdjacentHTML('beforeend', sectionsHTML[key]);
+            });
+        }
 
-                        const micBtn = document.getElementById('mic-btn');
-                        if (micBtn) {
-                            micBtn.addEventListener('click', function () {
-                                const isRecording = this.classList.contains('recording');
-                                if (isRecording) {
-                                    this.classList.remove('recording', 'animate-bounce', 'bg-red-500');
-                                    this.classList.add('bg-gradient-to-tr', 'from-[#8b1e2b]', 'to-[#c94555]');
-                                    alert('Voice recording saved and translated.');
-                                } else {
-                                    this.classList.add('recording', 'animate-bounce', 'bg-red-500');
-                                    this.classList.remove('bg-gradient-to-tr', 'from-[#8b1e2b]', 'to-[#c94555]');
-                                }
-                            });
-                        }
-                    } // End of buildDashboardSections
+        const micBtn = document.getElementById('mic-btn');
+        if (micBtn) {
+            micBtn.addEventListener('click', function() {
+                const isRecording = this.classList.contains('recording');
+                if (isRecording) {
+                    this.classList.remove('recording', 'animate-bounce', 'bg-red-500');
+                    this.classList.add('bg-gradient-to-tr', 'from-[#8b1e2b]', 'to-[#c94555]');
+                    alert('Voice recording saved and translated.');
+                } else {
+                    this.classList.add('recording', 'animate-bounce', 'bg-red-500');
+                    this.classList.remove('bg-gradient-to-tr', 'from-[#8b1e2b]', 'to-[#c94555]');
+                }
+            });
+        }
 
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', initDashboard);
-                    } else {
-                        initDashboard();
+        const sidebarLinks = document.querySelectorAll('aside a, aside [data-path]');
+        sidebarLinks.forEach(link => {
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+            
+            newLink.addEventListener('click', (e) => {
+                const path = newLink.getAttribute('data-path');
+                if (!path) return;
+                
+                e.preventDefault();
+                newLink.style.transform = 'scale(0.95)';
+                setTimeout(() => newLink.style.transform = 'none', 100);
+
+                setTimeout(() => {
+                    if (path === 'tamil99-typing') {
+                        window.location.href = '../tamil99_suite_typing_studio_ultra_premium/index.html';
+                        return;
+                    } 
+                    if (path === 'english-to-tamil') {
+                        window.location.href = '../fluent_tamil_precision/index.html';
+                        return;
                     }
-                })();}) ();
-            </script>
-</body>
+                    
+                    let targetSectionId = path;
+                    if (path.includes('learn-tamil')) targetSectionId = 'learn-tamil';
+                    if (path.includes('typing-practice')) targetSectionId = 'typing-practice';
+                    if (path.includes('government-forms') || path.includes('government')) targetSectionId = 'gov-forms';
+                    if (path.includes('documents') || path.includes('pdf')) targetSectionId = 'docs-pdf';
+                    if (path.includes('text-editor')) targetSectionId = 'text-editor';
+                    if (path.includes('voice-to-text')) targetSectionId = 'voice-to-text';
 
+                    const targetSection = document.getElementById('section-' + targetSectionId);
+                    
+                    if (targetSection || targetSectionId === 'dashboard') {
+                        document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+                        
+                        const sectionToShow = targetSectionId === 'dashboard' ? document.getElementById('section-dashboard') : targetSection;
+                        if(sectionToShow) sectionToShow.classList.remove('hidden');
+
+                        document.querySelectorAll('aside a, aside [data-path]').forEach(l => {
+                            l.classList.remove('bg-gradient-to-r', 'from-[#8b1e2b]', 'via-[#6f121d]', 'to-[#4c0913]', 'shadow-[0_4px_16px_rgba(139,30,43,0.4)]', 'border-[#d4af37]/30', 'text-white');
+                            l.classList.add('text-white/75', 'hover:bg-white/10');
+                        });
+
+                        newLink.classList.add('bg-gradient-to-r', 'from-[#8b1e2b]', 'via-[#6f121d]', 'to-[#4c0913]', 'shadow-[0_4px_16px_rgba(139,30,43,0.4)]', 'border-[#d4af37]/30', 'text-white');
+                        newLink.classList.remove('text-white/75', 'hover:bg-white/10');
+                    } else {
+                        console.error('Target section not found:', targetSectionId);
+                    }
+                }, 150);
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    } else {
+        initDashboard();
+    }
+    
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            const hashId = window.location.hash.substring(1);
+            const targetSection = document.getElementById('section-' + hashId);
+            if (targetSection || hashId === 'dashboard') {
+                document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+                const sectionToShow = hashId === 'dashboard' ? document.getElementById('section-dashboard') : targetSection;
+                if(sectionToShow) sectionToShow.classList.remove('hidden');
+                
+                // Update active link in sidebar
+                const matchingLink = Array.from(document.querySelectorAll('aside a, aside [data-path]')).find(l => {
+                    const p = l.getAttribute('data-path');
+                    if (!p) return false;
+                    let ts = p;
+                    if (p.includes('learn-tamil')) ts = 'learn-tamil';
+                    if (p.includes('typing-practice')) ts = 'typing-practice';
+                    if (p.includes('government-forms') || p.includes('government')) ts = 'gov-forms';
+                    if (p.includes('documents') || p.includes('pdf')) ts = 'docs-pdf';
+                    if (p.includes('text-editor')) ts = 'text-editor';
+                    if (p.includes('voice-to-text')) ts = 'voice-to-text';
+                    return ts === hashId;
+                });
+                
+                if (matchingLink) {
+                    document.querySelectorAll('aside a, aside [data-path]').forEach(l => {
+                        l.classList.remove('bg-gradient-to-r', 'from-[#8b1e2b]', 'via-[#6f121d]', 'to-[#4c0913]', 'shadow-[0_4px_16px_rgba(139,30,43,0.4)]', 'border-[#d4af37]/30', 'text-white');
+                        l.classList.add('text-white/75', 'hover:bg-white/10');
+                    });
+                    matchingLink.classList.add('bg-gradient-to-r', 'from-[#8b1e2b]', 'via-[#6f121d]', 'to-[#4c0913]', 'shadow-[0_4px_16px_rgba(139,30,43,0.4)]', 'border-[#d4af37]/30', 'text-white');
+                    matchingLink.classList.remove('text-white/75', 'hover:bg-white/10');
+                }
+            }
+        }
+    });
+})();
+</script>
+</body>
 </html>

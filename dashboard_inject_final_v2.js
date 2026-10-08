@@ -143,6 +143,57 @@ const finalScript = `
                             <div class="bg-white rounded-xl border border-border shadow-sm p-4 text-center"><div class="w-20 h-24 bg-red-100 rounded mb-4 mx-auto flex items-center justify-center border border-red-200"><span class="material-symbols-outlined text-red-600 text-4xl">picture_as_pdf</span></div><h4 class="font-medium text-neutral text-sm">Letter_to_Editor.pdf</h4></div>
                         </div>
                     </div>
+                \`,
+                'keyboard-api-sdk': \`
+                    <div id="section-keyboard-api-sdk" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
+                        <header class="mb-6">
+                            <h1 class="text-3xl font-bold text-neutral">Keyboard API & SDK</h1>
+                            <p class="text-neutral-muted mt-1">Documentation and developer tools for the Tamil99 Engine.</p>
+                        </header>
+                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8 flex items-center justify-center text-center">
+                            <div>
+                                <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block">api</span>
+                                <h2 class="text-xl font-bold text-neutral">Developer Portal Coming Soon</h2>
+                                <p class="text-neutral-muted mt-2 max-w-md mx-auto">Access to the native OS-level Keyboard Hook API and web SDKs will be available in the next release.</p>
+                            </div>
+                        </div>
+                    </div>
+                \`,
+                'settings': \`
+                    <div id="section-settings" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
+                        <header class="mb-6">
+                            <h1 class="text-3xl font-bold text-neutral">Settings</h1>
+                            <p class="text-neutral-muted mt-1">Configure your suite preferences and keyboard behavior.</p>
+                        </header>
+                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8">
+                            <div class="space-y-6 max-w-2xl">
+                                <div class="flex items-center justify-between border-b border-border pb-4">
+                                    <div><h3 class="font-bold text-neutral">Smart Ligature Resolution</h3><p class="text-sm text-neutral-muted">Automatically resolve complex Tamil character combinations.</p></div>
+                                    <div class="w-10 h-6 bg-primary rounded-full relative"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div></div>
+                                </div>
+                                <div class="flex items-center justify-between border-b border-border pb-4">
+                                    <div><h3 class="font-bold text-neutral">Auto-Pulli (க்) Injection</h3><p class="text-sm text-neutral-muted">Inject Pulli automatically for consecutive consonants.</p></div>
+                                    <div class="w-10 h-6 bg-primary rounded-full relative"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                \`,
+                'help-support': \`
+                    <div id="section-help-support" class="page-section hidden w-full h-full flex flex-col p-8 bg-[#F1F5F9]">
+                        <header class="mb-6">
+                            <h1 class="text-3xl font-bold text-neutral">Help & Support</h1>
+                            <p class="text-neutral-muted mt-1">Get assistance and read documentation.</p>
+                        </header>
+                        <div class="flex-1 bg-white rounded-xl shadow-sm border border-border p-8 flex items-center justify-center text-center">
+                            <div>
+                                <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block">support_agent</span>
+                                <h2 class="text-xl font-bold text-neutral">Enterprise Support</h2>
+                                <p class="text-neutral-muted mt-2 max-w-md mx-auto">Please contact your State Department IT Admin for technical assistance with the Tamil99 Suite.</p>
+                                <button class="mt-6 px-6 py-2 bg-primary text-white rounded-lg shadow font-medium">Contact IT Desk</button>
+                            </div>
+                        </div>
+                    </div>
                 \`
             };
 
@@ -225,6 +276,41 @@ const finalScript = `
     } else {
         initDashboard();
     }
+    
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            const hashId = window.location.hash.substring(1);
+            const targetSection = document.getElementById('section-' + hashId);
+            if (targetSection || hashId === 'dashboard') {
+                document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+                const sectionToShow = hashId === 'dashboard' ? document.getElementById('section-dashboard') : targetSection;
+                if(sectionToShow) sectionToShow.classList.remove('hidden');
+                
+                // Update active link in sidebar
+                const matchingLink = Array.from(document.querySelectorAll('aside a, aside [data-path]')).find(l => {
+                    const p = l.getAttribute('data-path');
+                    if (!p) return false;
+                    let ts = p;
+                    if (p.includes('learn-tamil')) ts = 'learn-tamil';
+                    if (p.includes('typing-practice')) ts = 'typing-practice';
+                    if (p.includes('government-forms') || p.includes('government')) ts = 'gov-forms';
+                    if (p.includes('documents') || p.includes('pdf')) ts = 'docs-pdf';
+                    if (p.includes('text-editor')) ts = 'text-editor';
+                    if (p.includes('voice-to-text')) ts = 'voice-to-text';
+                    return ts === hashId;
+                });
+                
+                if (matchingLink) {
+                    document.querySelectorAll('aside a, aside [data-path]').forEach(l => {
+                        l.classList.remove('bg-gradient-to-r', 'from-[#8b1e2b]', 'via-[#6f121d]', 'to-[#4c0913]', 'shadow-[0_4px_16px_rgba(139,30,43,0.4)]', 'border-[#d4af37]/30', 'text-white');
+                        l.classList.add('text-white/75', 'hover:bg-white/10');
+                    });
+                    matchingLink.classList.add('bg-gradient-to-r', 'from-[#8b1e2b]', 'via-[#6f121d]', 'to-[#4c0913]', 'shadow-[0_4px_16px_rgba(139,30,43,0.4)]', 'border-[#d4af37]/30', 'text-white');
+                    matchingLink.classList.remove('text-white/75', 'hover:bg-white/10');
+                }
+            }
+        }
+    });
 })();
 </script>
 </body>
