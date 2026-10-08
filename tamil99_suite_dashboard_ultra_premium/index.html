@@ -15,6 +15,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&amp;family=Inter:wght@300;400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../app-theme.css" />
     <style>
         @layer base {
 
@@ -498,7 +500,7 @@
         <main class="relative pt-24 min-h-screen w-full px-gutter-desktop z-10">
             <div class="flex flex-col w-full pb-space-2xl space-y-space-xl">
                 <!-- Top Greeting & Grand Hero Banner with Royal Kolam & Golden Certification -->
-                <div
+                <div id="dashboard-intro"
                     class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#40000a] via-[#6e0518] to-[#991c2c] text-white p-space-xl shadow-[0_12px_36px_rgba(107,2,23,0.25)] border border-[#d4af37]/35 kolam-pattern">
                     <!-- Ambient internal gold radial glow -->
                     <div
@@ -514,27 +516,24 @@
                                     class="gold-badge text-[#5f4100] px-3 py-0.5 rounded-full font-label-sm text-[11px] font-extrabold tracking-wider uppercase flex items-center gap-1.5 shadow-sm">
                                     <span
                                         class="material-symbols-outlined text-[14px] text-[#7d5700]">military_tech</span>
-                                    Pro Enterprise Edition
+                                    Tamil99 Workspace
                                 </span>
                                 <span
                                     class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 backdrop-blur-md text-white/90 font-label-sm text-[11px] border border-white/15">
                                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                    Tamil Nadu State Dept Intranet Active
+                                    Ready to type in Tamil
                                 </span>
                                 <span
                                     class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#d4af37]/25 text-[#fae6b2] font-label-sm text-[10.5px] border border-[#d4af37]/40">
-                                    தமிழ்99 தரநிலை அங்கீகரிக்கப்பட்டது
+                                    Tamil99 keyboard layout
                                 </span>
                             </div>
                             <h1
                                 class="font-display text-[2rem] sm:text-[2.35rem] text-white font-extrabold tracking-tight leading-tight drop-shadow-sm">
-                                வணக்கம்! <span
-                                    class="bg-gradient-to-r from-white via-[#fae6b2] to-[#f5d77f] bg-clip-text text-transparent">Welcome
-                                    back, Kavitha</span> 👋
+                                Tamil typing, made simple
                             </h1>
                             <p class="font-body-lg text-white/80 text-[14.5px] max-w-xl leading-relaxed">
-                                Your premier Tamil productivity environment — hardware-accelerated Tamil99 keyboard
-                                engine, real-time ligature validation &amp; automated government gazette layout.
+                                Choose a workspace to start typing, translate, or work with Tamil text.
                             </p>
                         </div>
                         <!-- Quick Telemetry & Windows Switcher Pill Console -->
@@ -582,7 +581,7 @@
                     </div>
                 </div>
                 <!-- 4 Premium Metric Cards with Specular Highlights & Metallic Gradients -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+                <div id="dashboard-metrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
                     <!-- Card 1: Tamil Typing Words -->
                     <div
                         class="acrylic-glass card-specular p-space-lg rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(107,2,23,0.1)] group flex flex-col justify-between space-y-space-md">
@@ -710,19 +709,17 @@
                     <div class="flex items-center justify-between px-space-xs">
                         <div class="flex items-center gap-2.5">
                             <div class="w-2.5 h-2.5 rounded-full bg-[#8b1e2b] shadow-[0_0_8px_#8b1e2b]"></div>
-                            <span class="font-headline-sm text-[17px] font-bold text-[#200306]">Typing &amp; Composition
-                                Workspaces</span>
+                            <span class="font-headline-sm text-[17px] font-bold text-[#200306]">Choose a workspace</span>
                             <span
                                 class="px-2.5 py-0.5 rounded-full bg-slate-200/80 text-slate-700 font-label-sm text-[10.5px] font-semibold">Fast
                                 IME Launch</span>
                         </div>
-                        <span class="font-label-sm text-slate-500 text-[11.5px]">Click card or press shortcut key to
-                            switch live buffer</span>
+                        <span class="font-label-sm text-slate-500 text-[11.5px]">Your tools for Tamil text</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
                         <!-- Action 1: Tamil99 -->
                         <a class="acrylic-glass card-specular p-space-lg rounded-2xl hover:shadow-[0_12px_28px_rgba(107,2,23,0.15)] hover:border-[#8b1e2b]/50 transition-all duration-300 group flex flex-col justify-between min-h-[185px] relative overflow-hidden bg-gradient-to-br from-white via-white to-[#8b1e2b]/5"
-                            href="#" data-path="tamil99-typing" data-path="text-editor">
+                            href="#" data-path="tamil99-typing">
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between">
                                     <span
@@ -759,8 +756,8 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between">
                                     <span
-                                        class="px-2.5 py-0.5 rounded-full gold-badge text-[#5f4100] font-label-sm text-[10px] font-bold">AI
-                                        Transliterate</span>
+                                        class="px-2.5 py-0.5 rounded-full gold-badge text-[#5f4100] font-label-sm text-[10px] font-bold">Phonetic
+                                        Tamil</span>
                                     <kbd
                                         class="px-2 py-0.5 rounded-md keycap-3d text-slate-700 font-candidate-key text-[11px] font-bold">Ctrl
                                         + 2</kbd>

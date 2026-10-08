@@ -11,7 +11,7 @@ function createWindow () {
     autoHideMenuBar: true
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile(path.join(__dirname, 'tamil99_suite_dashboard_ultra_premium', 'index.html'));
 }
 
 app.whenReady().then(() => {
