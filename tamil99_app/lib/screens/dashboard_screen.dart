@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import '../theme/app_theme.dart';
 import 'tamil99_typing_module.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -80,9 +81,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           color: AppTheme.goldPrimary.withOpacity(0.5),
         ),
         const SizedBox(height: 24),
-        Text(pageName, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+        Text(context.watch<AppLanguageProvider>().translate(pageName), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
         const SizedBox(height: 16),
-        const Text('This module is currently under development.', style: TextStyle(fontSize: 16, color: Colors.black54)),
+        Text(context.watch<AppLanguageProvider>().translate('This module is currently under development.'), style: const TextStyle(fontSize: 16, color: Colors.black54)),
       ],
     );
   }
@@ -186,7 +187,7 @@ class _PhoneticTranslationModuleState extends State<PhoneticTranslationModule> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('English to Tamil Phonetic Typing', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+          Text(context.watch<AppLanguageProvider>().translate('English to Tamil Phonetic Typing'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
           const SizedBox(height: 24),
           Expanded(
             child: Row(
@@ -199,8 +200,8 @@ class _PhoneticTranslationModuleState extends State<PhoneticTranslationModule> {
                       onChanged: _transliterate,
                       maxLines: null,
                       expands: true,
-                      decoration: const InputDecoration(
-                        hintText: 'Type in English (e.g. "vanakkam")...',
+                      decoration: InputDecoration(
+                        hintText: context.watch<AppLanguageProvider>().translate('Type in English (e.g. "vanakkam")...'),
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(24),
                       ),
@@ -222,7 +223,7 @@ class _PhoneticTranslationModuleState extends State<PhoneticTranslationModule> {
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(color: Colors.grey.shade50, borderRadius: BorderRadius.circular(12), border: Border.all(color: AppTheme.goldPrimary.withOpacity(0.5))),
                     child: SingleChildScrollView(
-                      child: Text(outputText.isEmpty ? 'Translation will appear here...' : outputText, style: TextStyle(fontSize: 18, color: outputText.isEmpty ? Colors.black38 : Colors.black87, height: 1.6)),
+                      child: Text(outputText.isEmpty ? context.watch<AppLanguageProvider>().translate('Translation will appear here...') : outputText, style: TextStyle(fontSize: 18, color: outputText.isEmpty ? Colors.black38 : Colors.black87, height: 1.6)),
                     ),
                   ),
                 ),
@@ -280,7 +281,7 @@ class _VoiceToTextModuleState extends State<VoiceToTextModule> {
       padding: const EdgeInsets.all(32.0),
       child: Column(
         children: [
-          const Text('Tamil Voice to Text Dictation', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+          Text(context.watch<AppLanguageProvider>().translate('Tamil Voice to Text Dictation'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
           const SizedBox(height: 32),
           GestureDetector(
             onTap: _toggleRecording,
@@ -304,7 +305,7 @@ class _VoiceToTextModuleState extends State<VoiceToTextModule> {
           ),
           const SizedBox(height: 24),
           Text(
-            isRecording ? 'Listening for Tamil speech...' : 'Tap the microphone to start speaking',
+            context.watch<AppLanguageProvider>().translate(isRecording ? 'Listening for Tamil speech...' : 'Tap the microphone to start speaking'),
             style: TextStyle(fontSize: 16, color: isRecording ? Colors.red : Colors.black54, fontWeight: isRecording ? FontWeight.bold : FontWeight.normal),
           ),
           const SizedBox(height: 32),
@@ -319,7 +320,7 @@ class _VoiceToTextModuleState extends State<VoiceToTextModule> {
               ),
               child: SingleChildScrollView(
                 child: Text(
-                  outputText.isEmpty ? 'Waiting for voice input...' : outputText,
+                  outputText.isEmpty ? context.watch<AppLanguageProvider>().translate('Waiting for voice input...') : outputText,
                   style: TextStyle(
                     fontSize: 24, 
                     color: outputText.isEmpty ? Colors.black38 : Colors.black87, 
@@ -370,8 +371,8 @@ class _TextEditorModuleState extends State<TextEditorModule> {
 
   void _saveDraft() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Draft saved successfully!'),
+      SnackBar(
+        content: Text(context.read<AppLanguageProvider>().translate('Draft saved successfully!')),
         backgroundColor: AppTheme.primary,
         behavior: SnackBarBehavior.floating,
       ),
@@ -380,6 +381,7 @@ class _TextEditorModuleState extends State<TextEditorModule> {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Column(
@@ -388,11 +390,11 @@ class _TextEditorModuleState extends State<TextEditorModule> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('TN Govt Circular Draft', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+              Text(t('TN Govt Circular Draft'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
               ElevatedButton.icon(
                 onPressed: _saveDraft,
                 icon: const Icon(Icons.save),
-                label: const Text('Save Draft'),
+                label: Text(t('Save Draft')),
                 style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primary, foregroundColor: Colors.white),
               )
             ],
@@ -412,7 +414,7 @@ class _TextEditorModuleState extends State<TextEditorModule> {
                 _buildToolbarIcon(Icons.format_align_center, textAlign == TextAlign.center, () => setState(() => textAlign = TextAlign.center)),
                 _buildToolbarIcon(Icons.format_align_right, textAlign == TextAlign.right, () => setState(() => textAlign = TextAlign.right)),
                 const Spacer(),
-                Text('Words: $wordCount', style: const TextStyle(color: Colors.black54, fontSize: 12)),
+                Text('${t('Words:')} $wordCount', style: const TextStyle(color: Colors.black54, fontSize: 12)),
               ],
             ),
           ),
@@ -430,7 +432,7 @@ class _TextEditorModuleState extends State<TextEditorModule> {
                 textAlign: textAlign,
                 maxLines: null,
                 expands: true,
-                decoration: const InputDecoration(border: InputBorder.none, hintText: 'Start writing here...'),
+                decoration: InputDecoration(border: InputBorder.none, hintText: context.watch<AppLanguageProvider>().translate('Start writing here...')),
                 style: TextStyle(
                   fontSize: 16, 
                   height: 1.8,
@@ -470,6 +472,18 @@ class LearnTamilModule extends StatefulWidget {
 
 class _LearnTamilModuleState extends State<LearnTamilModule> {
   String selectedCategory = 'Vowels (Uyir)';
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   final Map<String, List<Map<String, String>>> lessons = {
     'Vowels (Uyir)': [
@@ -491,12 +505,13 @@ class _LearnTamilModuleState extends State<LearnTamilModule> {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Learn Tamil Basics', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+          Text(t('Learn Tamil Basics'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
           const SizedBox(height: 24),
           Row(
             children: [
@@ -538,7 +553,7 @@ class _LearnTamilModuleState extends State<LearnTamilModule> {
           border: Border.all(color: isSelected ? AppTheme.primary : Colors.black12),
         ),
         child: Text(
-          title, 
+          context.watch<AppLanguageProvider>().translate(title), 
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.black87, 
             fontWeight: FontWeight.bold
@@ -553,9 +568,14 @@ class _LearnTamilModuleState extends State<LearnTamilModule> {
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
-        onTap: () {
+        onTap: () async {
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Pronunciation: $english'), duration: const Duration(seconds: 1)));
+          try {
+            await audioPlayer.play(UrlSource('https://translate.google.com/translate_tts?ie=UTF-8&q=${Uri.encodeComponent(tamil)}&tl=ta&client=tw-ob'));
+          } catch (e) {
+            debugPrint("Audio Error: $e");
+          }
         },
         borderRadius: BorderRadius.circular(12),
         child: Center(
@@ -669,6 +689,7 @@ class _TypingPracticeModuleState extends State<TypingPracticeModule> {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Column(
@@ -677,11 +698,11 @@ class _TypingPracticeModuleState extends State<TypingPracticeModule> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Typing Practice Arena', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+              Text(t('Typing Practice Arena'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
               ElevatedButton.icon(
                 onPressed: _reset,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Restart'),
+                label: Text(t('Restart')),
                 style: ElevatedButton.styleFrom(backgroundColor: AppTheme.goldPrimary, foregroundColor: AppTheme.wineDeep),
               )
             ],
@@ -739,8 +760,8 @@ class _TypingPracticeModuleState extends State<TypingPracticeModule> {
                 controller: _controller,
                 maxLines: null,
                 expands: true,
-                decoration: const InputDecoration(
-                  hintText: 'Start typing the text above...',
+                decoration: InputDecoration(
+                  hintText: context.watch<AppLanguageProvider>().translate('Start typing the text above...'),
                   border: InputBorder.none,
                 ),
                 style: const TextStyle(fontSize: 24, color: AppTheme.primary, height: 1.6, letterSpacing: 1.2),
@@ -768,7 +789,7 @@ class _TypingPracticeModuleState extends State<TypingPracticeModule> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label, style: const TextStyle(color: Colors.black54, fontSize: 14)),
+                Text(context.watch<AppLanguageProvider>().translate(label), style: const TextStyle(color: Colors.black54, fontSize: 14)),
                 Text(value, style: const TextStyle(color: AppTheme.wineDeep, fontSize: 20, fontWeight: FontWeight.bold)),
               ],
             )
@@ -797,6 +818,7 @@ class _GovernmentFormsModuleState extends State<GovernmentFormsModule> {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Row(
@@ -808,7 +830,7 @@ class _GovernmentFormsModuleState extends State<GovernmentFormsModule> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Available Forms', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+                Text(t('Available Forms'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
                 const SizedBox(height: 24),
                 Expanded(
                   child: ListView.builder(
@@ -854,7 +876,7 @@ class _GovernmentFormsModuleState extends State<GovernmentFormsModule> {
                 boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
               ),
               child: selectedForm == null
-                  ? const Center(child: Text('Select a form from the left to begin filling it out.', style: TextStyle(color: Colors.black54, fontSize: 18)))
+                  ? Center(child: Text(t('Select a form from the left to begin filling it out.'), style: const TextStyle(color: Colors.black54, fontSize: 18)))
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -870,10 +892,10 @@ class _GovernmentFormsModuleState extends State<GovernmentFormsModule> {
                           alignment: Alignment.centerRight,
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Form Submitted Successfully!')));
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('Form Submitted Successfully!'))));
                             },
                             icon: const Icon(Icons.send),
-                            label: const Text('சமர்ப்பி (Submit)'),
+                            label: Text(t('சமர்ப்பி (Submit)')),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppTheme.primary,
                               foregroundColor: Colors.white,
@@ -928,6 +950,7 @@ class _DocumentsAndPdfModuleState extends State<DocumentsAndPdfModule> {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Row(
@@ -939,7 +962,7 @@ class _DocumentsAndPdfModuleState extends State<DocumentsAndPdfModule> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('My Documents', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+                Text(t('My Documents'), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
                 const SizedBox(height: 24),
                 Expanded(
                   child: ListView.builder(
@@ -996,7 +1019,7 @@ class _DocumentsAndPdfModuleState extends State<DocumentsAndPdfModule> {
                 boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
               ),
               child: selectedDoc == null
-                  ? const Center(child: Text('Select a document to preview.', style: TextStyle(color: Colors.black54, fontSize: 18)))
+                  ? Center(child: Text(t('Select a document to preview.'), style: const TextStyle(color: Colors.black54, fontSize: 18)))
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -1013,13 +1036,13 @@ class _DocumentsAndPdfModuleState extends State<DocumentsAndPdfModule> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _buildActionButton(Icons.open_in_new, 'Open', () {}),
+                            _buildActionButton(Icons.open_in_new, t('Open'), () {}),
                             const SizedBox(width: 16),
-                            _buildActionButton(Icons.download, 'Download', () {}),
+                            _buildActionButton(Icons.download, t('Download'), () {}),
                             const SizedBox(width: 16),
-                            _buildActionButton(Icons.share, 'Share', () {}),
+                            _buildActionButton(Icons.share, t('Share'), () {}),
                             const SizedBox(width: 16),
-                            _buildActionButton(Icons.delete, 'Delete', () {}, isDestructive: true),
+                            _buildActionButton(Icons.delete, t('Delete'), () {}, isDestructive: true),
                           ],
                         )
                       ],
@@ -1051,14 +1074,15 @@ class KeyboardApiSdkModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Developer API & SDK', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+          Text(t('Developer API & SDK'), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
           const SizedBox(height: 8),
-          const Text('Integrate our powerful Tamil99 typing engine directly into your own web or mobile applications.', style: TextStyle(fontSize: 16, color: Colors.black54)),
+          Text(t('Integrate our powerful Tamil99 typing engine directly into your own web or mobile applications.'), style: const TextStyle(fontSize: 16, color: Colors.black54)),
           const SizedBox(height: 32),
           // API Key Section
           Container(
@@ -1074,7 +1098,7 @@ class KeyboardApiSdkModule extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Your Secret API Key', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+                    Text(t('Your Secret API Key'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
                     const SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -1088,10 +1112,10 @@ class KeyboardApiSdkModule extends StatelessWidget {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('API Key copied to clipboard!')));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('API Key copied to clipboard!'))));
                   },
                   icon: const Icon(Icons.copy),
-                  label: const Text('Copy Key'),
+                  label: Text(t('Copy Key')),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primary,
                     foregroundColor: Colors.white,
@@ -1103,7 +1127,7 @@ class KeyboardApiSdkModule extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           // Code Snippet Section
-          const Text('Quick Integration Guide', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+          Text(t('Quick Integration Guide'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
           const SizedBox(height: 16),
           Expanded(
             child: Row(
@@ -1111,7 +1135,7 @@ class KeyboardApiSdkModule extends StatelessWidget {
                 // Web Snippet
                 Expanded(
                   child: _buildCodeCard(
-                    title: 'HTML / JS Widget',
+                    title: t('HTML / JS Widget'),
                     icon: Icons.language,
                     code: '''
 <!-- Include the Tamil99 SDK -->
@@ -1208,8 +1232,12 @@ class _SettingsModuleState extends State<SettingsModule> {
   bool _isDarkMode = false;
   bool _autoCorrect = true;
   bool _soundOnKey = false;
-  String _selectedLanguage = 'English';
   String _keyboardLayout = 'Tamil99 Standard';
+
+  // Profile Variables
+  String _userName = 'Tamil User';
+  String _userEmail = 'user@tamil99.in';
+  String _userPhone = '+91 9876543210';
 
   // Localization Maps
   final Map<String, Map<String, String>> _i18n = {
@@ -1229,6 +1257,10 @@ class _SettingsModuleState extends State<SettingsModule> {
       'auto_correct_desc': 'Automatically fix common typing mistakes.',
       'key_sound': 'Keyboard Sound',
       'key_sound_desc': 'Play a click sound on every keystroke.',
+      'profile': 'User Profile',
+      'profile_name': 'Full Name',
+      'profile_email': 'Email Address',
+      'profile_phone': 'Phone Number',
       'save': 'Save Settings',
       'saved_msg': 'Settings saved successfully!',
     },
@@ -1248,12 +1280,19 @@ class _SettingsModuleState extends State<SettingsModule> {
       'auto_correct_desc': 'பொதுவான தட்டச்சு தவறுகளை தானாக சரிசெய்யும்.',
       'key_sound': 'விசைப்பலகை ஒலி',
       'key_sound_desc': 'ஒவ்வொரு விசை அழுத்தத்திலும் ஒலியை இயக்கவும்.',
+      'profile': 'பயனர் சுயவிவரம் (User Profile)',
+      'profile_name': 'முழு பெயர் (Full Name)',
+      'profile_email': 'மின்னஞ்சல் (Email)',
+      'profile_phone': 'தொலைபேசி எண் (Phone)',
       'save': 'அமைப்புகளைச் சேமி (Save)',
       'saved_msg': 'அமைப்புகள் வெற்றிகரமாக சேமிக்கப்பட்டன!',
     }
   };
 
-  String _t(String key) => _i18n[_selectedLanguage]![key]!;
+  String _t(String key) {
+    final isTamil = context.watch<AppLanguageProvider>().currentLanguage == 'TAMIL' || context.watch<AppLanguageProvider>().currentLanguage == 'Tamil99';
+    return _i18n[isTamil ? 'தமிழ்' : 'English']![key]!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1283,6 +1322,14 @@ class _SettingsModuleState extends State<SettingsModule> {
               ),
               child: ListView(
                 children: [
+                  _buildSectionHeader(_t('profile')),
+                  _buildTextFieldRow(_t('profile_name'), _userName, (val) => _userName = val, textColor),
+                  const SizedBox(height: 16),
+                  _buildTextFieldRow(_t('profile_email'), _userEmail, (val) => _userEmail = val, textColor),
+                  const SizedBox(height: 16),
+                  _buildTextFieldRow(_t('profile_phone'), _userPhone, (val) => _userPhone = val, textColor),
+                  const Divider(height: 32),
+                  
                   _buildSectionHeader(_t('appearance')),
                   SwitchListTile(
                     title: Text(_t('dark_mode'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
@@ -1302,8 +1349,10 @@ class _SettingsModuleState extends State<SettingsModule> {
                     _t('app_lang'),
                     _t('app_lang_desc'),
                     ['English', 'தமிழ்'],
-                    _selectedLanguage,
-                    (val) => setState(() => _selectedLanguage = val!),
+                    context.watch<AppLanguageProvider>().currentLanguage == 'Tamil' ? 'தமிழ்' : 'English',
+                    (val) {
+                      context.read<AppLanguageProvider>().setLanguage(val == 'தமிழ்' ? 'Tamil' : 'English');
+                    },
                     textColor,
                     subtitleColor,
                   ),
@@ -1376,6 +1425,29 @@ class _SettingsModuleState extends State<SettingsModule> {
     );
   }
 
+  Widget _buildTextFieldRow(String title, String currentValue, ValueChanged<String> onChanged, Color textColor) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Row(
+        children: [
+          Expanded(flex: 2, child: Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textColor))),
+          Expanded(
+            flex: 3,
+            child: TextFormField(
+              initialValue: currentValue,
+              onChanged: onChanged,
+              style: TextStyle(color: textColor),
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildDropdownRow(String title, String subtitle, List<String> options, String currentValue, ValueChanged<String?> onChanged, Color textColor, Color subtitleColor) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -1437,14 +1509,16 @@ class _HelpAndSupportModuleState extends State<HelpAndSupportModule> {
 
   @override
   Widget build(BuildContext context) {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
+
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Help & Support', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
+          Text(t('Help & Support'), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.wineDeep)),
           const SizedBox(height: 8),
-          const Text('Find answers to common questions or reach out to our support team.', style: TextStyle(fontSize: 16, color: Colors.black54)),
+          Text(t('Find answers to common questions or reach out to our support team.'), style: const TextStyle(fontSize: 16, color: Colors.black54)),
           const SizedBox(height: 32),
           Expanded(
             child: Row(
@@ -1455,29 +1529,29 @@ class _HelpAndSupportModuleState extends State<HelpAndSupportModule> {
                   flex: 3,
                   child: ListView(
                     children: [
-                      _buildSectionHeader('Frequently Asked Questions (FAQ)'),
-                      _buildFaqItem('How do I switch to Tamil99 typing?', 'Go to the Settings page and select "Tamil99 Standard" under the Default Keyboard Layout dropdown.'),
-                      _buildFaqItem('Is my typing data saved online?', 'No, your typing practice stats and text editor documents are saved completely offline on your local device.'),
-                      _buildFaqItem('How can I use this keyboard in other apps?', 'You can check the "Keyboard API & SDK" section to learn how to integrate our open-source typing engine into your own apps or web platforms.'),
-                      _buildFaqItem('How does the voice typing work?', 'Voice typing utilizes your device\'s built-in speech recognition to transcribe spoken Tamil into text. Click the mic icon to start speaking.'),
+                      _buildSectionHeader(t('Frequently Asked Questions (FAQ)')),
+                      _buildFaqItem(t('How do I switch to Tamil99 typing?'), t('Go to the Settings page and select "Tamil99 Standard" under the Default Keyboard Layout dropdown.')),
+                      _buildFaqItem(t('Is my typing data saved online?'), t('No, your typing practice stats and text editor documents are saved completely offline on your local device.')),
+                      _buildFaqItem(t('How can I use this keyboard in other apps?'), t('You can check the "Keyboard API & SDK" section to learn how to integrate our open-source typing engine into your own apps or web platforms.')),
+                      _buildFaqItem(t('How does the voice typing work?'), t('Voice typing utilizes your device\'s built-in speech recognition to transcribe spoken Tamil into text. Click the mic icon to start speaking.')),
                       
                       const SizedBox(height: 32),
-                      _buildSectionHeader('Resources & Legal'),
+                      _buildSectionHeader(t('Resources & Legal')),
                       ListTile(
                         leading: const Icon(Icons.menu_book, color: AppTheme.primary),
-                        title: const Text('Detailed User Guide'),
+                        title: Text(t('Detailed User Guide')),
                         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                         onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.privacy_tip, color: AppTheme.primary),
-                        title: const Text('Privacy Policy'),
+                        title: Text(t('Privacy Policy')),
                         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                         onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.gavel, color: AppTheme.primary),
-                        title: const Text('Terms of Service'),
+                        title: Text(t('Terms of Service')),
                         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                         onTap: () {},
                       ),
@@ -1499,11 +1573,11 @@ class _HelpAndSupportModuleState extends State<HelpAndSupportModule> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Contact Us', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primary)),
+                        Text(t('Contact Us'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primary)),
                         const SizedBox(height: 16),
                         TextField(
                           decoration: InputDecoration(
-                            labelText: 'Your Email',
+                            labelText: t('Your Email'),
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                           ),
                         ),
@@ -1512,7 +1586,7 @@ class _HelpAndSupportModuleState extends State<HelpAndSupportModule> {
                           controller: _messageController,
                           maxLines: 4,
                           decoration: InputDecoration(
-                            labelText: 'How can we help you?',
+                            labelText: t('How can we help you?'),
                             alignLabelWithHint: true,
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                           ),
@@ -1523,14 +1597,14 @@ class _HelpAndSupportModuleState extends State<HelpAndSupportModule> {
                           child: ElevatedButton.icon(
                             onPressed: () {
                               if (_messageController.text.isNotEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Message sent to support! We will reply soon.')));
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('Message sent to support! We will reply soon.'))));
                                 _messageController.clear();
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter a message first.')));
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('Please enter a message first.'))));
                               }
                             },
                             icon: const Icon(Icons.send, size: 18),
-                            label: const Text('Send Message'),
+                            label: Text(t('Send Message')),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppTheme.primary,
                               foregroundColor: Colors.white,
@@ -1539,11 +1613,11 @@ class _HelpAndSupportModuleState extends State<HelpAndSupportModule> {
                           ),
                         ),
                         const Spacer(),
-                        const Center(
+                        Center(
                           child: Text(
-                            'Tamil99 App v1.0.0\nMade with ❤️ for Tamil',
+                            t('Tamil99 App v1.0.0\nMade with ❤️ for Tamil'),
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.black54, height: 1.5),
+                            style: const TextStyle(color: Colors.black54, height: 1.5),
                           ),
                         )
                       ],
@@ -1595,6 +1669,7 @@ class DashboardHomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final parentState = context.findAncestorStateOfType<_DashboardScreenState>();
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
 
     return Expanded(
       child: Column(
@@ -1610,7 +1685,7 @@ class DashboardHomeContent extends StatelessWidget {
                 children: [
                   const DashboardHeroBanner(),
                   const SizedBox(height: 32),
-                  const SectionTitle(title: 'Choose a workspace', badgeText: 'Fast IME Launch'),
+                  SectionTitle(title: t('Choose a workspace'), badgeText: t('Fast IME Launch')),
                   const SizedBox(height: 16),
                   // Workspace Cards Grid
                   LayoutBuilder(
@@ -1623,10 +1698,10 @@ class DashboardHomeContent extends StatelessWidget {
                         spacing: 16,
                         runSpacing: 16,
                         children: [
-                          SizedBox(width: cardWidth, child: WorkspaceCard(title: 'Tamil99 Typing', icon: Icons.keyboard, description: 'Type directly using official Tamil99 layout with live glyph preview & intelligent automatic uyirmei fusion.', isFlagship: true, actionText: 'Launch Tamil99 Mode', onTap: () => parentState?._onNavigate('Tamil99 Typing'))),
-                          SizedBox(width: cardWidth, child: WorkspaceCard(title: 'English → Tamil', icon: Icons.translate, description: 'Phonetic transliteration in real-time with Tamil word predictor.', badge: 'Phonetic Tamil', actionText: 'Launch Phonetic Engine', onTap: () => parentState?._onNavigate('English → Tamil'))),
-                          SizedBox(width: cardWidth, child: WorkspaceCard(title: 'Tamil Voice to Text', icon: Icons.mic, description: 'Speak naturally in Tamil dialects with automated comma, thodarbu and full stop punctuation recognition.', badge: 'Whisper Tamil v2', actionText: 'Start Voice Dictation', onTap: () => parentState?._onNavigate('Voice to Text'))),
-                          SizedBox(width: cardWidth, child: WorkspaceCard(title: 'New Tamil Document', icon: Icons.description, description: 'Draft an A4 official office note, state petition, circular letter, or academic research script with Tamil headers.', badge: 'Unicode Editor', actionText: 'Open Blank Canvas', onTap: () => parentState?._onNavigate('Text Editor'))),
+                          SizedBox(width: cardWidth, child: WorkspaceCard(title: t('Tamil99 Typing'), icon: Icons.keyboard, description: t('Type directly using official Tamil99 layout with live glyph preview & intelligent automatic uyirmei fusion.'), isFlagship: true, actionText: t('Launch Tamil99 Mode'), onTap: () => parentState?._onNavigate('Tamil99 Typing'))),
+                          SizedBox(width: cardWidth, child: WorkspaceCard(title: t('English → Tamil'), icon: Icons.translate, description: t('Phonetic transliteration in real-time with Tamil word predictor.'), badge: t('Phonetic Tamil'), actionText: t('Launch Phonetic Engine'), onTap: () => parentState?._onNavigate('English → Tamil'))),
+                          SizedBox(width: cardWidth, child: WorkspaceCard(title: t('Tamil Voice to Text'), icon: Icons.mic, description: t('Speak naturally in Tamil dialects with automated comma, thodarbu and full stop punctuation recognition.'), badge: t('Whisper Tamil v2'), actionText: t('Start Voice Dictation'), onTap: () => parentState?._onNavigate('Voice to Text'))),
+                          SizedBox(width: cardWidth, child: WorkspaceCard(title: t('New Tamil Document'), icon: Icons.description, description: t('Draft an A4 official office note, state petition, circular letter, or academic research script with Tamil headers.'), badge: t('Unicode Editor'), actionText: t('Open Blank Canvas'), onTap: () => parentState?._onNavigate('Text Editor'))),
                         ],
                       );
                     }
@@ -1654,15 +1729,15 @@ class DashboardHomeContent extends StatelessWidget {
                               alignment: WrapAlignment.spaceBetween,
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 8,
                                   children: [
-                                    const Text('Recent Documents & Forms', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                                    const SizedBox(width: 8),
+                                    Text(t('Recent Documents & Forms'), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                     Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                       decoration: BoxDecoration(color: Colors.red.shade50, borderRadius: BorderRadius.circular(12)),
-                                      child: Text('24 Indexed', style: TextStyle(fontSize: 10, color: Colors.red.shade900, fontWeight: FontWeight.bold)),
+                                      child: Text(t('24 Indexed'), style: TextStyle(fontSize: 10, color: Colors.red.shade900, fontWeight: FontWeight.bold)),
                                     ),
                                   ],
                                 ),
@@ -1677,15 +1752,15 @@ class DashboardHomeContent extends StatelessWidget {
                                         border: Border.all(color: Colors.black12),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         children: [
                                           Icon(Icons.search, size: 16, color: Colors.black54),
                                           SizedBox(width: 8),
                                           Expanded(child: TextField(
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'Filter files...',
-                                              hintStyle: TextStyle(color: Colors.black54, fontSize: 12),
+                                              hintText: t('Filter files...'),
+                                              hintStyle: const TextStyle(color: Colors.black54, fontSize: 12),
                                               isDense: true,
                                               contentPadding: EdgeInsets.zero,
                                             ),
@@ -1705,11 +1780,11 @@ class DashboardHomeContent extends StatelessWidget {
                                           color: AppTheme.primary,
                                           borderRadius: BorderRadius.circular(8),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           children: [
                                             Icon(Icons.add, color: Colors.white, size: 16),
                                             SizedBox(width: 8),
-                                            Text('New', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                                            Text(t('New'), style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                                           ],
                                         ),
                                       ),
@@ -1719,7 +1794,7 @@ class DashboardHomeContent extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 8),
-                            const Text('Tamil Nadu Government forms, legal petitions, circulars, and departmental manuscripts', style: TextStyle(color: Colors.black54, fontSize: 12)),
+                            Text(t('Tamil Nadu Government forms, legal petitions, circulars, and departmental manuscripts'), style: const TextStyle(color: Colors.black54, fontSize: 12)),
                           ],
                         ),
                       ),
@@ -1738,22 +1813,25 @@ class DashboardHomeContent extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Row(
-                                  children: [
-                                    Icon(Icons.lightbulb_outline, color: AppTheme.goldPrimary, size: 20),
-                                    SizedBox(width: 8),
-                                    Text('Tamil99 Key Guide', style: TextStyle(fontWeight: FontWeight.bold)),
-                                  ],
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.lightbulb_outline, color: AppTheme.goldPrimary, size: 20),
+                                      const SizedBox(width: 8),
+                                      Expanded(child: Text(t('Tamil99 Key Guide'), style: const TextStyle(fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis)),
+                                    ],
+                                  ),
                                 ),
+                                const SizedBox(width: 8),
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                   decoration: BoxDecoration(color: Colors.red.shade50, borderRadius: BorderRadius.circular(12)),
-                                  child: Text('Tip #14', style: TextStyle(fontSize: 10, color: Colors.red.shade900, fontWeight: FontWeight.bold)),
+                                  child: Text(t('Tip #14'), style: TextStyle(fontSize: 10, color: Colors.red.shade900, fontWeight: FontWeight.bold)),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 16),
-                            const Text('Did you know? Pressing produces க் (kKa), and produces the grantha ligature ஸ்ரீ.', style: TextStyle(fontSize: 12, color: Colors.black87)),
+                            Text(t('Did you know? Pressing produces க் (kKa), and produces the grantha ligature ஸ்ரீ.'), style: const TextStyle(fontSize: 12, color: Colors.black87)),
                           ],
                         ),
                       )
@@ -1827,7 +1905,7 @@ class WorkspaceCard extends StatelessWidget {
                   color: isFlagship ? AppTheme.primaryContainer : Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text(badge ?? 'Flagship IME', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isFlagship ? Colors.white : Colors.black87)),
+                child: Text(badge ?? context.watch<AppLanguageProvider>().translate('Flagship IME'), style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isFlagship ? Colors.white : Colors.black87)),
               ),
               const SizedBox(height: 16),
               Row(
@@ -1843,7 +1921,8 @@ class WorkspaceCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(actionText, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.primary)),
+                  Expanded(child: Text(actionText, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.primary), overflow: TextOverflow.ellipsis)),
+                  const SizedBox(width: 8),
                   const Icon(Icons.arrow_forward, size: 16, color: AppTheme.primary),
                 ],
               ),
@@ -1892,18 +1971,18 @@ class AppSidebar extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Text('Tamil99 Suite', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                          SizedBox(width: 4),
-                          Text('PRO', style: TextStyle(fontSize: 8, color: AppTheme.goldPrimary, fontWeight: FontWeight.bold)),
+                          Text(context.watch<AppLanguageProvider>().translate('Tamil99 Suite'), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                          const SizedBox(width: 4),
+                          Text(context.watch<AppLanguageProvider>().translate('PRO'), style: const TextStyle(fontSize: 8, color: AppTheme.goldPrimary, fontWeight: FontWeight.bold)),
                         ],
                       ),
-                      Text('தமிழ் ஸ்மார்ட் டைப்பிங்', style: TextStyle(color: AppTheme.goldLight, fontSize: 10)),
+                      const Text('தமிழ் ஸ்மார்ட் டைப்பிங்', style: TextStyle(color: AppTheme.goldLight, fontSize: 10)),
                     ],
                   ),
                 ),
@@ -1945,17 +2024,19 @@ class AppSidebar extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.greenAccent, shape: BoxShape.circle)),
-                        const SizedBox(width: 8),
-                        const Text('Engine v2.4 Active', style: TextStyle(fontSize: 10, color: Colors.white70)),
-                      ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.greenAccent, shape: BoxShape.circle)),
+                          const SizedBox(width: 8),
+                          Expanded(child: Text(context.watch<AppLanguageProvider>().translate('Engine v2.4 Active'), style: const TextStyle(fontSize: 10, color: Colors.white70), overflow: TextOverflow.ellipsis)),
+                        ],
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(color: AppTheme.goldPrimary, borderRadius: BorderRadius.circular(4)),
-                      child: const Text('Tamil99 IME', style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.black)),
+                      child: Text(context.watch<AppLanguageProvider>().translate('Tamil99 IME'), style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.black)),
                     ),
                   ],
                 ),
@@ -1975,12 +2056,12 @@ class AppSidebar extends StatelessWidget {
                         child: const Icon(Icons.person, color: Colors.white, size: 20),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Kavitha R. (Govt. Dept)', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white)),
-                            Text('Enterprise License', style: TextStyle(fontSize: 10, color: AppTheme.goldLight)),
+                            Text(context.watch<AppLanguageProvider>().translate('Kavitha R. (Govt. Dept)'), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white), overflow: TextOverflow.ellipsis),
+                            Text(context.watch<AppLanguageProvider>().translate('Enterprise License'), style: const TextStyle(fontSize: 10, color: AppTheme.goldLight), overflow: TextOverflow.ellipsis),
                           ],
                         ),
                       ),
@@ -2046,34 +2127,39 @@ class AppHeader extends StatefulWidget {
 }
 
 class _AppHeaderState extends State<AppHeader> {
-  String _activeMode = 'Tamil99';
+  String _activeMode = 'ENG';
   bool _isDarkMode = false;
   bool _hasNotifications = true;
+
+  String t(String text) {
+    if (!mounted) return text;
+    return context.read<AppLanguageProvider>().translate(text);
+  }
 
   void _showSyncDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(Icons.cloud_done, color: Colors.teal),
-            SizedBox(width: 8),
-            Text('Cloud Sync Status')
+            const Icon(Icons.cloud_done, color: Colors.teal),
+            const SizedBox(width: 8),
+            Text(t('Cloud Sync Status'))
           ]
         ),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Account: kavitha.r@tn.gov.in'),
-            SizedBox(height: 8),
-            Text('Last synced: Just now'),
-            SizedBox(height: 8),
-            Text('Status: All documents and settings are backed up to TN Gov Cloud.', style: TextStyle(color: Colors.black54)),
+            const Text('Account: kavitha.r@tn.gov.in'),
+            const SizedBox(height: 8),
+            const Text('Last synced: Just now'),
+            const SizedBox(height: 8),
+            Text(t('Status: All documents and settings are backed up to TN Gov Cloud.'), style: const TextStyle(color: Colors.black54)),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(t('Close'))),
         ],
       )
     );
@@ -2086,10 +2172,10 @@ class _AppHeaderState extends State<AppHeader> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Notifications'),
-        content: const Text('No new notifications at this time.'),
+        title: Text(t('Notifications')),
+        content: Text(t('No new notifications at this time.')),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(t('Close'))),
         ],
       )
     );
@@ -2104,40 +2190,42 @@ class _AppHeaderState extends State<AppHeader> {
         color: _isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
         border: Border(bottom: BorderSide(color: _isDarkMode ? Colors.white12 : Colors.black12)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Center(
-                  child: Text('த', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Tamil99 Smart Typing Suite', style: TextStyle(fontWeight: FontWeight.bold, color: _isDarkMode ? Colors.white : Colors.black87, fontSize: 16)),
-                  Text('Enterprise Desktop IME Platform & Gov Cloud Sync', style: TextStyle(fontSize: 10, color: _isDarkMode ? Colors.white54 : Colors.black54)),
-                ],
-              ),
-            ],
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              reverse: true,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 16),
+                  Row(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryContainer,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text('த', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(context.watch<AppLanguageProvider>().translate('Tamil99 Smart Typing Suite'), style: TextStyle(fontWeight: FontWeight.bold, color: _isDarkMode ? Colors.white : Colors.black87, fontSize: 16), overflow: TextOverflow.ellipsis),
+                          Text(context.watch<AppLanguageProvider>().translate('Enterprise Desktop IME Platform & Gov Cloud Sync'), style: TextStyle(fontSize: 10, color: _isDarkMode ? Colors.white54 : Colors.black54), overflow: TextOverflow.ellipsis),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(width: 16),
                   Container(
                     width: 250,
                     height: 36,
@@ -2154,7 +2242,7 @@ class _AppHeaderState extends State<AppHeader> {
                         Expanded(child: TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Search commands...',
+                            hintText: context.watch<AppLanguageProvider>().translate('Search commands...'),
                             hintStyle: TextStyle(color: _isDarkMode ? Colors.white38 : Colors.black45, fontSize: 11),
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
@@ -2176,9 +2264,8 @@ class _AppHeaderState extends State<AppHeader> {
                     ),
                     child: Row(
                       children: [
-                        _buildModeTab('Tamil99', isDark: _isDarkMode),
-                        _buildModeTab('Phonetic', isDark: _isDarkMode),
-                        _buildModeTab('EN', isDark: _isDarkMode),
+                        _buildModeTab('ENG', isDark: _isDarkMode),
+                        _buildModeTab('TAMIL', isDark: _isDarkMode),
                       ],
                     ),
                   ),
@@ -2217,11 +2304,11 @@ class _AppHeaderState extends State<AppHeader> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(color: Colors.teal.shade50, borderRadius: BorderRadius.circular(16)),
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.cloud_done_outlined, color: Colors.teal, size: 16),
-                          SizedBox(width: 6),
-                          Text('TN Gov Cloud Synced', style: TextStyle(color: Colors.teal, fontSize: 12, fontWeight: FontWeight.bold)),
+                          const Icon(Icons.cloud_done_outlined, color: Colors.teal, size: 16),
+                          const SizedBox(width: 6),
+                          Text(context.watch<AppLanguageProvider>().translate('TN Gov Cloud Synced'), style: const TextStyle(color: Colors.teal, fontSize: 12, fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),
@@ -2239,11 +2326,13 @@ class _AppHeaderState extends State<AppHeader> {
                   ),
                 ],
               ),
-            ),
-          )
-        ],
-      ),
-    );
+            ],
+          ),
+        ),
+      );
+    },
+  ),
+);
   }
 
   Widget _buildModeTab(String mode, {required bool isDark}) {
@@ -2327,25 +2416,25 @@ class DashboardHeroBanner extends StatelessWidget {
                         gradient: const LinearGradient(colors: [AppTheme.goldLight, AppTheme.goldPrimary]),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.military_tech, size: 14, color: Colors.brown),
-                          SizedBox(width: 4),
-                          Text('TAMIL99 WORKSPACE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black87, letterSpacing: 1.1)),
+                          const Icon(Icons.military_tech, size: 14, color: Colors.brown),
+                          const SizedBox(width: 4),
+                          Text(context.watch<AppLanguageProvider>().translate('TAMIL99 WORKSPACE'), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black87, letterSpacing: 1.1)),
                         ],
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Tamil typing, made simple',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w800, color: Colors.white),
+                Text(
+                  context.watch<AppLanguageProvider>().translate('Tamil typing, made simple'),
+                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, color: Colors.white),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Choose a workspace to start typing, translate, or work with Tamil text.',
-                  style: TextStyle(fontSize: 14, color: Colors.white70),
+                Text(
+                  context.watch<AppLanguageProvider>().translate('Choose a workspace to start typing, translate, or work with Tamil text.'),
+                  style: const TextStyle(fontSize: 14, color: Colors.white70),
                 ),
               ],
             ),

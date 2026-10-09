@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../theme/app_theme.dart';
+import '../main.dart';
 
 class Tamil99TypingModule extends StatefulWidget {
   const Tamil99TypingModule({super.key});
@@ -143,6 +145,7 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
   }
 
   Widget _buildToolbar() {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Row(
       children: [
         const Icon(Icons.format_bold, color: Colors.black87, size: 20),
@@ -156,11 +159,11 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.red.shade100),
           ),
-          child: const Row(
+          child: Row(
             children: [
               Icon(Icons.adjust, color: AppTheme.primary, size: 14),
               SizedBox(width: 6),
-              Text('Pulli Auto-join active (F Key)', style: TextStyle(color: AppTheme.primary, fontSize: 12, fontWeight: FontWeight.bold)),
+              Text(t('Pulli Auto-join active (F Key)'), style: const TextStyle(color: AppTheme.primary, fontSize: 12, fontWeight: FontWeight.bold)),
             ],
           ),
         ),
@@ -172,11 +175,11 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.black12),
           ),
-          child: const Row(
+          child: Row(
             children: [
               Icon(Icons.circle, color: AppTheme.goldPrimary, size: 8),
               SizedBox(width: 6),
-              Text('Unicode: 0B85-0BD7', style: TextStyle(color: Colors.black54, fontSize: 12)),
+              Text(t('Unicode: 0B85-0BD7'), style: const TextStyle(color: Colors.black54, fontSize: 12)),
             ],
           ),
         ),
@@ -184,7 +187,7 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
         OutlinedButton.icon(
           onPressed: () {},
           icon: const Icon(Icons.copy, size: 16, color: AppTheme.wineDeep),
-          label: const Text('Copy Tamil', style: TextStyle(color: AppTheme.wineDeep, fontWeight: FontWeight.bold)),
+          label: Text(t('Copy Tamil'), style: const TextStyle(color: AppTheme.wineDeep, fontWeight: FontWeight.bold)),
           style: OutlinedButton.styleFrom(
             side: const BorderSide(color: AppTheme.wineDeep),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -194,16 +197,17 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
         TextButton.icon(
           onPressed: _clearText,
           icon: const Icon(Icons.delete_outline, size: 16, color: Colors.black54),
-          label: const Text('Clear', style: TextStyle(color: Colors.black54)),
+          label: Text(t('Clear'), style: const TextStyle(color: Colors.black54)),
         ),
       ],
     );
   }
 
   Widget _buildLigatureBuffer() {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Row(
       children: [
-        const Text('LIGATURE BUFFER:', style: TextStyle(color: AppTheme.wineDeep, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+        Text(t('LIGATURE BUFFER:'), style: const TextStyle(color: AppTheme.wineDeep, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
         const SizedBox(width: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -215,10 +219,10 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
           child: const Text('க்  +  அ  =  க', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(width: 12),
-        const Text('Uyirmey composition confirmed via Tamil99 state engine', style: TextStyle(color: Colors.black54, fontSize: 12, fontStyle: FontStyle.italic)),
+        Text(t('Uyirmey composition confirmed via Tamil99 state engine'), style: const TextStyle(color: Colors.black54, fontSize: 12, fontStyle: FontStyle.italic)),
         const Spacer(),
-        const Text('Active Layer: ', style: TextStyle(color: Colors.black54, fontSize: 12)),
-        const Text('Primary (அ-ஔ / க்)', style: TextStyle(color: AppTheme.wineDeep, fontSize: 12, fontWeight: FontWeight.bold)),
+        Text(t('Active Layer: '), style: const TextStyle(color: Colors.black54, fontSize: 12)),
+        Text(t('Primary (அ-ஔ / க்)'), style: const TextStyle(color: AppTheme.wineDeep, fontSize: 12, fontWeight: FontWeight.bold)),
       ],
     );
   }
@@ -247,9 +251,9 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
             maxLines: null,
             expands: true,
             style: const TextStyle(color: Colors.black87, fontSize: 24, height: 1.8),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Start typing in Tamil99...',
+              hintText: context.watch<AppLanguageProvider>().translate('Start typing in Tamil99...'),
               hintStyle: TextStyle(color: Colors.black26),
             ),
           ),
@@ -550,30 +554,31 @@ class _Tamil99TypingModuleState extends State<Tamil99TypingModule> {
   }
 
   Widget _buildProductivityOrbit() {
+    final t = (String text) => context.watch<AppLanguageProvider>().translate(text);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
+        Row(
           children: [
-            Icon(Icons.hub, color: AppTheme.goldPrimary, size: 24),
-            SizedBox(width: 12),
-            Text('Productivity Orbit & Quick Launch', style: TextStyle(color: AppTheme.wineDeep, fontSize: 20, fontWeight: FontWeight.bold)),
-            Spacer(),
-            Text('Global Access Accelerators', style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
+            const Icon(Icons.hub, color: AppTheme.goldPrimary, size: 24),
+            const SizedBox(width: 12),
+            Text(t('Productivity Orbit & Quick Launch'), style: const TextStyle(color: AppTheme.wineDeep, fontSize: 20, fontWeight: FontWeight.bold)),
+            const Spacer(),
+            Text(t('Global Access Accelerators'), style: const TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
           ],
         ),
         const SizedBox(height: 24),
         Row(
           children: [
-            _buildOrbitCard('Tamil99 Studio', 'Master Canvas', 'Ctrl+1', Icons.keyboard),
+            _buildOrbitCard(t('Tamil99 Studio'), t('Master Canvas'), 'Ctrl+1', Icons.keyboard),
             const SizedBox(width: 16),
-            _buildOrbitCard('Phonetic Morph', 'English→Tamil', 'Ctrl+2', Icons.translate, iconColor: AppTheme.wineDeep),
+            _buildOrbitCard(t('Phonetic Morph'), t('English→Tamil'), 'Ctrl+2', Icons.translate, iconColor: AppTheme.wineDeep),
             const SizedBox(width: 16),
-            _buildOrbitCard('Voice Orb', 'Acoustic Tamil', 'Ctrl+3', Icons.mic, iconColor: AppTheme.primary),
+            _buildOrbitCard(t('Voice Orb'), t('Acoustic Tamil'), 'Ctrl+3', Icons.mic, iconColor: AppTheme.primary),
             const SizedBox(width: 16),
-            _buildOrbitCard('Typing Arena', 'Sangam Sprint', 'Ctrl+4', Icons.sports_esports),
+            _buildOrbitCard(t('Typing Arena'), t('Sangam Sprint'), 'Ctrl+4', Icons.sports_esports),
             const SizedBox(width: 16),
-            _buildOrbitCard('PDF Studio', 'Unicode Print', 'Ctrl+5', Icons.picture_as_pdf, iconColor: AppTheme.primary),
+            _buildOrbitCard(t('PDF Studio'), t('Unicode Print'), 'Ctrl+5', Icons.picture_as_pdf, iconColor: AppTheme.primary),
           ],
         ),
       ],
